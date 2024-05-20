@@ -1,4 +1,4 @@
 ﻿# Ns-3-simulations
 ### Tarefas pendendes:
-- Limpar e organizar datasets
-- Refazer arquivos df.py para adcionar.
+- [x] Limpar e organizar datasets
+- [x]  Refazer arquivos df.py para adcionar.
