@@ -3,8 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 #%%
-data = pd.read_csv('DlRlcStats.csv')
+data = pd.read_csv('DlRlcStats.csv', sep=';', usecols=['% start', 'delay'])
 df = pd.DataFrame(data)
+df
 # %%
 tempo = df["% start"]
 tempo
