@@ -3,7 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 #%%
-data = pd.read_csv('DlRlcStats.csv')
+data = pd.read_csv('DlRlcStats.csv', sep=';', 
+                   usecols=['% start', 'delay'])
 df = pd.DataFrame(data)
 df
 # %%
@@ -22,7 +23,6 @@ delay1 = np.full_like(tempo, delay[0])
 
 #%%
 plt.plot(tempo, delay1)
-#plt.plot(tempo, delay2)
 plt.title('Delay rate (350m)')
 plt.xlabel('Tempo(s)')
 plt.ylabel('Delay(ms)')
