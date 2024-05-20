@@ -3,8 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 #%%
-data = pd.read_csv('DlRlcStats-100Ghz.csv', usecols=["% start",
-                                              	"delay"])
+data = pd.read_csv('DlRlcStats-100Ghz.csv', sep=';', 
+                   usecols=['% start', 'delay']
+                   )
 df = pd.DataFrame(data)
 df
 # %%
