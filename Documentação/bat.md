@@ -44,12 +44,11 @@ def fitness(antenna_pos, user_positions, user_apps):
     intensities = signal_intensity(antenna_pos, user_positions)
     priorities = np.array([application_priority(app) for app in user_apps])
     return np.sum(intensities * priorities)
-    ```
 
 A função de fitness avalia a qualidade das posições dos usuários baseado na intensidade do sinal e na prioridade das aplicações.
 
 ### Inicialização dos Morcegos
-```Python
+
 def initialize_bats(num_bats, num_users, dimensions, min_dist=300, max_dist=500):
     user_positions = []
     for _ in range(num_bats):
