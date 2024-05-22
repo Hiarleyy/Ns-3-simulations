@@ -63,6 +63,6 @@ Ns-3 é um simulador de redes de eventos discretos para sistemas de Internet, di
 
 # Contato
 - Marcos Hiarley <marcoshiarley.silva@gmail.com>
-- Robert Gabriel <robertdsgabriel@gmail.com>
+- Robert Gabriel <robertgabriel@disroot.org>
 
 
