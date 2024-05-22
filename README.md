@@ -11,8 +11,7 @@
 [Ns-3](https://www.nsnam.org/) é um simulador de redes de eventos discretos para sistemas de Internet, direcionado principalmente para pesquisa e uso educacional. O ns-3 é um software gratuito e de código aberto, licenciado sob a licença GNU GPLv2 e mantido por uma comunidade mundial.
 
 ## mmWave: Módulo do ns-3
-- Este é um módulo ns-3 para simulação de redes celulares 5G operando em mmWaves. Uma descrição deste módulo pode ser encontrada neste artigo.
-- Principais características:
+- Este é um módulo ns-3 para simulação de redes celulares 5G operando em mmWaves.
 - Suporte a uma ampla gama de modelos de canais, incluindo o modelo baseado em 3GPP TR 38.901 para frequências entre 0,5 e 100 GHz. Ray tracing e traços medidos também podem ser usados.
 - Classes PHY e MAC personalizadas que suportam a estrutura e numerologias de quadros 3GPP NR.
 - Agendadores personalizados para suporte a formatos TDD dinâmicos
