@@ -3,13 +3,25 @@
 - [x] Limpar e organizar datasets
 - [x]  Refazer arquivos df.py para adcionar.
 - [ ]  Implementar o Algoritmo de Batman.
-  - [ ] Terminar a documentação do batman
+- [ ] Terminar a documentação do batman
 - [ ]  Implementar as Entradas da simulação em CSV.
+
+
 ## Cabeçalho
 Ns-3 é um simulador de redes de eventos discretos para sistemas de Internet, direcionado principalmente para pesquisa e uso educacional. O ns-3 é um software gratuito e de código aberto, licenciado sob a licença GNU GPLv2 e mantido por uma comunidade mundial.
 
-## Introdução
+## mmWave: Módulo do ns-3
+- Este é um módulo ns-3 para simulação de redes celulares 5G operando em mmWaves. Uma descrição deste módulo pode ser encontrada neste artigo.
+- Principais características:
+- Suporte a uma ampla gama de modelos de canais, incluindo o modelo baseado em 3GPP TR 38.901 para frequências entre 0,5 e 100 GHz. Ray tracing e traços medidos também podem ser usados.
+- Classes PHY e MAC personalizadas que suportam a estrutura e numerologias de quadros 3GPP NR.
+- Agendadores personalizados para suporte a formatos TDD dinâmicos
+- Agregação de operadora na camada MAC
+- Melhorias na camada RLC com ressegmentação de pacotes para retransmissões
+- Conectividade dupla com estações base LTE, com transferência rápida de células secundárias e rastreamento de canal
+- Simulação de elementos centrais da rede (também com o MME como nó real)
 
+Para mais informações sobre o módulo ns3 e possivel encontrar em [mmWave-Ns3](https://github.com/nyuwireless-unipd/ns3-mmwave)
 
 ## RxPacketTrace
 ### RxPacketTrace é responsável para fazer o monitoramento dos pacotes que são transmitidos na simulação. Cada coluna do arquivo contém informações específicas sobre os pacotes que foram transmitidos (DL-Downlink) e os pacotes Recebidos (UL-Uplink)
