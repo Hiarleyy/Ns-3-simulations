@@ -7,8 +7,8 @@
 - [ ]  Implementar as Entradas da simulação em CSV.
 
 
-## Cabeçalho
-Ns-3 é um simulador de redes de eventos discretos para sistemas de Internet, direcionado principalmente para pesquisa e uso educacional. O ns-3 é um software gratuito e de código aberto, licenciado sob a licença GNU GPLv2 e mantido por uma comunidade mundial.
+## Network simulator
+[Ns-3](https://www.nsnam.org/) é um simulador de redes de eventos discretos para sistemas de Internet, direcionado principalmente para pesquisa e uso educacional. O ns-3 é um software gratuito e de código aberto, licenciado sob a licença GNU GPLv2 e mantido por uma comunidade mundial.
 
 ## mmWave: Módulo do ns-3
 - Este é um módulo ns-3 para simulação de redes celulares 5G operando em mmWaves. Uma descrição deste módulo pode ser encontrada neste artigo.
