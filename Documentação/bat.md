@@ -178,11 +178,3 @@ A função plot_results plota as posições dos usuários antes e depois da otim
 ### Resumo
 O código simula um cenário onde usuários de uma rede se movem em relação a uma antena, otimizando suas posições para melhorar a intensidade do sinal e priorizar certos tipos de aplicações. Utiliza o algoritmo BAT para essa otimização, assegurando que as novas posições sejam adequadas e respeitem distâncias mínimas necessárias.
 
-
-
-
-
-
-
-## References
-JJ
