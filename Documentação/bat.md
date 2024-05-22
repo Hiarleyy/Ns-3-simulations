@@ -5,13 +5,13 @@ Created:2024-05-22, Wed May 3 - 15:48
 O código  implementa uma versão simplificada do algoritmo BAT (Bat Algorithm) para otimização de posicionamento de usuários em uma rede de internet, considerando a presença de uma antena e a movimentação dos usuários. Vamos analisar o que cada parte do código faz:
 
 ### Importações e Definição de Constantes
-```python
+```
 import numpy as np
 import matplotlib.pyplot as plt
 ```
 
 #### Definindo constantes
-```Python
+```
 NUM_USERS = 2
 DIMENSIONS = 2  # x, y
 BAT_POPULATION = 30
@@ -44,6 +44,7 @@ def fitness(antenna_pos, user_positions, user_apps):
     intensities = signal_intensity(antenna_pos, user_positions)
     priorities = np.array([application_priority(app) for app in user_apps])
     return np.sum(intensities * priorities)
+```
 
 A função de fitness avalia a qualidade das posições dos usuários baseado na intensidade do sinal e na prioridade das aplicações.
 
@@ -59,7 +60,8 @@ def initialize_bats(num_bats, num_users, dimensions, min_dist=300, max_dist=500)
 Esta função inicializa as posições dos usuários de forma aleatória dentro de um intervalo definido.
 
 ### Atualização de Posições
-```Python
+
+```
 def update_position(bats, best_bat, f_min, f_max, antenna_pos, app_priorities, separation_factor=0.8, lower_bound=0, upper_bound=500):
     beta = np.random.rand()
     freq = f_min + (f_max - f_min) * beta
@@ -99,7 +101,7 @@ def update_position(bats, best_bat, f_min, f_max, antenna_pos, app_priorities, s
 Esta função atualiza as posições dos morcegos (usuários), garantindo que as novas posições respeitem certas condições, como distância mínima da antena e entre usuários.
 
 ### Algoritmo BAT Principal
-```Python
+```
 def bat_algorithm(antenna_pos, user_positions, user_apps, num_bats=BAT_POPULATION, max_iter=MAX_ITER):
     bats = initialize_bats(num_bats, NUM_USERS, DIMENSIONS, min_dist=50, max_dist=450)
     best_bat = bats[0]
@@ -122,7 +124,7 @@ def bat_algorithm(antenna_pos, user_positions, user_apps, num_bats=BAT_POPULATIO
 Esta função implementa o algoritmo BAT para otimização das posições dos usuários, buscando a melhor posição que maximiza a função de fitness.
 
 ### Plotagem e Exemplo de Uso
-```Python
+```
 def plot_results(antenna_pos, original_user_pos, new_user_pos):
     plt.figure(figsize=(10, 10))
 
@@ -146,7 +148,7 @@ def plot_results(antenna_pos, original_user_pos, new_user_pos):
     plt.show()
 ```
 # Exemplo de uso
-```Python
+```
 antenna_pos = np.array([250, 250])
 user_positions = initialize_bats(1, NUM_USERS, DIMENSIONS, min_dist=50, max_dist=450)[0]
 user_apps = np.random.choice(['low', 'medium', 'high'], NUM_USERS)
