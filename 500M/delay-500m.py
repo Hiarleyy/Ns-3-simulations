@@ -1,5 +1,4 @@
 #%%
-from numpy import size
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
@@ -26,7 +25,6 @@ plt.plot(tempo, delay,
          linewidth=1, linestyle='-',
           color = 'blue')
 
-plt.title('Signal rate (15m)')
 plt.title('Delay rate (500m)')
 plt.xlabel('Tempo(s)')
 plt.ylabel('Delay(ms)')
