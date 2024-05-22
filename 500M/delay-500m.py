@@ -1,7 +1,8 @@
 #%%
+from numpy import size
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
+from matplotlib.ticker import MultipleLocator
 # %%
 data = pd.read_csv('DlRlcStats-500m.csv', usecols=["% start","delay"] , 
                    sep=';')
@@ -15,26 +16,24 @@ tempo = df['% start']
 tempo # series
 # %%
 delay = df['delay']
-delay.value_counts()
-#%%
-delay = delay.unique()
 delay
-# %%
-tempo = np.linspace(0, 60)
-delay1 = np.full_like(tempo, delay[0])
-#delay2 = np.full_like(tempo, delay[1])
-delay3 = np.full_like(tempo, delay[2])
-delay4 = np.full_like(tempo, delay[3])
-delay5 = np.full_like(tempo, delay[4])
+
 #%%
-plt.plot(tempo, delay1)
-#plt.plot(tempo, delay2)
-plt.plot(tempo, delay3)
-plt.plot(tempo, delay4)
-plt.plot(tempo, delay5)
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.plot(tempo, delay)
+plt.plot(tempo, delay, 
+        
+         linewidth=1, linestyle='-',
+          color = 'blue')
+
+plt.title('Signal rate (15m)')
 plt.title('Delay rate (500m)')
 plt.xlabel('Tempo(s)')
 plt.ylabel('Delay(ms)')
+plt.xticks(range(0, 61, 10)) # intervalo no eixo x
+ax.set_xlim(0,61) # tamanho do eixo x
+ax.set_ylim(0.0006, 0.00081) # variação em y
+ax.yaxis.set_major_locator(MultipleLocator(0.00005)) # PA em y
 plt.show
 # %%
 
