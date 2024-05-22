@@ -22,7 +22,7 @@ Aqui são importadas as bibliotecas necessárias e definidas as constantes para 
 ### Funções Auxiliares
 
 #### Função de Intensidade de Sinal
-```Python
+```python
 def signal_intensity(antenna_pos, user_pos):
     distance = np.linalg.norm(antenna_pos - user_pos, axis=1)
     return 1 / (distance ** 2)
@@ -30,7 +30,7 @@ def signal_intensity(antenna_pos, user_pos):
 Esta função calcula a intensidade do sinal baseado na distância entre a antena e as posições dos usuários.
 
 #### Função de Prioridade da Aplicação
-```Python
+```python
 def application_priority(app_type):
     priorities = {'video': 1.0, 'voice': 0.8, 'data': 0.5}
     return priorities.get(app_type, 0.5)
@@ -39,7 +39,7 @@ def application_priority(app_type):
 Esta função atribui uma prioridade para cada tipo de aplicação (video, voz, dados).
 
 #### Função de Fitness
-```Python
+```python
 def fitness(antenna_pos, user_positions, user_apps):
     intensities = signal_intensity(antenna_pos, user_positions)
     priorities = np.array([application_priority(app) for app in user_apps])
@@ -49,7 +49,7 @@ def fitness(antenna_pos, user_positions, user_apps):
 A função de fitness avalia a qualidade das posições dos usuários baseado na intensidade do sinal e na prioridade das aplicações.
 
 ### Inicialização dos Morcegos
-
+```python
 def initialize_bats(num_bats, num_users, dimensions, min_dist=300, max_dist=500):
     user_positions = []
     for _ in range(num_bats):
@@ -61,7 +61,7 @@ Esta função inicializa as posições dos usuários de forma aleatória dentro 
 
 ### Atualização de Posições
 
-```
+```python
 def update_position(bats, best_bat, f_min, f_max, antenna_pos, app_priorities, separation_factor=0.8, lower_bound=0, upper_bound=500):
     beta = np.random.rand()
     freq = f_min + (f_max - f_min) * beta
@@ -101,7 +101,7 @@ def update_position(bats, best_bat, f_min, f_max, antenna_pos, app_priorities, s
 Esta função atualiza as posições dos morcegos (usuários), garantindo que as novas posições respeitem certas condições, como distância mínima da antena e entre usuários.
 
 ### Algoritmo BAT Principal
-```
+```python
 def bat_algorithm(antenna_pos, user_positions, user_apps, num_bats=BAT_POPULATION, max_iter=MAX_ITER):
     bats = initialize_bats(num_bats, NUM_USERS, DIMENSIONS, min_dist=50, max_dist=450)
     best_bat = bats[0]
@@ -124,7 +124,7 @@ def bat_algorithm(antenna_pos, user_positions, user_apps, num_bats=BAT_POPULATIO
 Esta função implementa o algoritmo BAT para otimização das posições dos usuários, buscando a melhor posição que maximiza a função de fitness.
 
 ### Plotagem e Exemplo de Uso
-```
+```python
 def plot_results(antenna_pos, original_user_pos, new_user_pos):
     plt.figure(figsize=(10, 10))
 
@@ -148,7 +148,7 @@ def plot_results(antenna_pos, original_user_pos, new_user_pos):
     plt.show()
 ```
 # Exemplo de uso
-```
+```python
 antenna_pos = np.array([250, 250])
 user_positions = initialize_bats(1, NUM_USERS, DIMENSIONS, min_dist=50, max_dist=450)[0]
 user_apps = np.random.choice(['low', 'medium', 'high'], NUM_USERS)
