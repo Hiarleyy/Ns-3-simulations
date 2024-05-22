@@ -1,4 +1,4 @@
-# Algoritmo Batman
+# Algoritmo Batman  🦇 🦇 🦇
 
 
 O código  implementa uma versão simplificada do algoritmo BAT (Bat Algorithm) para otimização de posicionamento de usuários em uma rede de internet, considerando a presença de uma antena e a movimentação dos usuários. Vamos analisar o que cada parte do código faz:
