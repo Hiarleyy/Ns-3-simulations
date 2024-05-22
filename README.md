@@ -7,3 +7,5 @@
 ```python
 print('teste')
 ```
+
+Ns-3 é um simulador de redes de eventos discretos para sistemas de Internet, direcionado principalmente para pesquisa e uso educacional. O ns-3 é um software gratuito e de código aberto, licenciado sob a licença GNU GPLv2 e mantido por uma comunidade mundial.
