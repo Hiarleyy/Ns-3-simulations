@@ -275,11 +275,12 @@ if (useEpc)
       ueStaticRouting2->SetDefaultRoute (epcHelper->GetUeDefaultGatewayAddress (), 1);//2
       Ptr<Ipv4StaticRouting> ueStaticRouting3 = ipv4RoutingHelper.GetStaticRouting (ueNodes.Get (2)->GetObject<Ipv4> ());
       ueStaticRouting3->SetDefaultRoute (epcHelper->GetUeDefaultGatewayAddress (), 1);//3
-/*
-.
-.
-.
-*/
+      /*
+      .
+      .
+      .
+      */
+
       ueStaticRouting5->SetDefaultRoute (epcHelper->GetUeDefaultGatewayAddress (), 1);//10
       helper->AttachToClosestEnb (ueNetDevices, enbNetDevices);
 ~~~~
