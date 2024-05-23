@@ -68,7 +68,7 @@ Para mais informações sobre o módulo ns3 e possivel encontrar em [mmWave-Ns3]
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/cd2436ee-cf0b-4368-8434-176ba3ec8eb5)
 
 ## Documentação
-#### [Algoritmo Batman](https://github.com/Hiarleyy/Ns-3-simulations/blob/main/Documenta%C3%A7%C3%A3o/bat.md)
+#### [Algoritmo Batman](https://github.com/Hiarleyy/Ns-3-simulations/blob/main/Documenta%C3%A7%C3%A3o/bat.md) || [Simulação NS3 em C++](https://github.com/Hiarleyy/Ns-3-simulations/blob/main/Documenta%C3%A7%C3%A3o/packet5G.md)
 
 
 ## Contato
