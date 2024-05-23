@@ -1,8 +1,4 @@
-
-tags: #fleeting 
-Created:22-05-2024, Wed May 3 - 18:15
-Week-number:21
-
+# Packet_5G
 ## Execução do programa
 
 para realizar a execução do programa e fazer as simulações desejadas é necessário instalar as dependências do programa:
