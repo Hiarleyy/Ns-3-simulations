@@ -6,7 +6,7 @@ def filter_by_rnti(df, rnti_values):
     return {rnti: df[df['rnti'] == rnti] for rnti in rnti_values}
 
 # Exemplo de uso
-rnti_values = range(1, 11)  # De 1 a 10
+rnti_values = range(1, 11)  # p/ 10 usuaŕios
 filtered_dfs = filter_by_rnti(df, rnti_values)
 # Plotando os gráficos
 plt.figure(figsize=(10, 6))
