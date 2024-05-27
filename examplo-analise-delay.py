@@ -29,10 +29,14 @@ plt.plot(tempo, delay3, label='3')
 plt.title('Delay rate')
 plt.xlabel('Tempo(s)')
 plt.ylabel('Delay(ms)')
-plt.legend()
+plt.legend(loc='upper left',
+           bbox_to_anchor=(1,1),
+           ncol=1,
+           fontsize='medium',
+           title='Legenda',
+           title_fontsize='large',
+)
 
 
-
-plt.show
+plt.show()
 # %%
-
