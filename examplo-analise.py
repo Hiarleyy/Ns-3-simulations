@@ -1,13 +1,14 @@
 #%%
 import pandas as pd
 # %%
-df = pd.read_csv('DlRlcStats.csv', sep=';')
+df = pd.read_csv('DlRlcStats.csv',usecols=['% start', 'RNTI', 'delay'	] , sep=';')
 type(df)
 #%%
-devices = df['RNTI']
-device1 = devices[devices == 1]
-device2 = devices[devices == 2]
-device3 = devices[devices == 3]
+df['RNTI'].value_counts()
+#%%
+df1 = df[df['RNTI'] == 1]
+df2 = df[df['RNTI'] ==2]
+df3 = df[df['RNTI']==3]
 # %%
-devices.value_counts()
+
 # %%
