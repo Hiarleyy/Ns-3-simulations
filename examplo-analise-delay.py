@@ -23,13 +23,13 @@ delay3 = df3['delay']
 delay3 = np.where( delay3 == 0, np.nan, delay3)
 pd.DataFrame(delay1)
 #%%
-
-plt.plot(tempo, delay1, label=)
-plt.plot(tempo, delay2)
-plt.plot(tempo, delay3)
+plt.plot(tempo, delay1, label='1')
+plt.plot(tempo, delay2, label='2')
+plt.plot(tempo, delay3, label='3')
 plt.title('Delay rate')
 plt.xlabel('Tempo(s)')
 plt.ylabel('Delay(ms)')
+plt.legend()
 
 
 
