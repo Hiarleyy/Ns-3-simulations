@@ -1,6 +1,5 @@
 #%%
 import pandas as pd
-import numpy as np
 # %%
 df = pd.read_csv('DlRlcStats.csv', sep=';')
 type(df)
