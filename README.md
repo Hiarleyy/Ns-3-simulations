@@ -1,10 +1,10 @@
 ﻿# Ns-3-simulations
 ### Tarefas pendendes:
-- [x] Limpar e organizar datasets
-- [x]  Refazer arquivos df.py para adcionar.
-- [x]  Implementar o Algoritmo de Batman.
+- [ ] Corrigir bugs da simulação ns3
+- [ ]  Implementar o Algoritmo de Batman.
 - [ ] Terminar a documentação do batman
 - [ ]  Implementar as Entradas da simulação em CSV.
+- [ ]  Padronizar tamanho da imagens
 
 
 ## Network simulator
