@@ -6,6 +6,15 @@
 - [ ]  Implementar as Entradas da simulação em CSV.
 - [ ]  Padronizar tamanho da imagens
 
+[10:27 PM, 5/29/2024] JJ - Prof. José Jailton: Delay:  média dos usuários de baixa prioridade (antes e depois - no mesmo gráfico)
+Delay:  média dos usuários de média prioridade (antes e depois - no mesmo gráfico)
+Delay:  média dos usuários de alta prioridade (antes e depois - no mesmo gráfico)
+SINR:  média dos usuários de baixa prioridade (antes e depois - no mesmo gráfico)
+SINR:  média dos usuários de média prioridade (antes e depois - no mesmo gráfico)
+SINR:  média dos usuários de alta prioridade (antes e depois - no mesmo gráfico)
+[10:28 PM, 5/29/2024] JJ - Prof. José Jailton: Delay: Média geral dos 10 usuários (antes e depois no mesmo gráfico)
+SINR: Média geral dos 10 usuários (antes e depois no mesmo gráfico)
+
 
 ## Network simulator
 [Ns-3](https://www.nsnam.org/) é um simulador de redes de eventos discretos para sistemas de Internet, direcionado principalmente para pesquisa e uso educacional. O ns-3 é um software gratuito e de código aberto, licenciado sob a licença GNU GPLv2 e mantido por uma comunidade mundial.
