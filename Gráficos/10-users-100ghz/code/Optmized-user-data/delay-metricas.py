@@ -1,5 +1,18 @@
 #%%
 import matplotlib.pyplot as plt
+time_list = [0, 10, 20, 30, 40, 50, 60]
+mean_geral_original =  [0.000724] * 7
+mean_geral_optmized =  [0.000713] * 7
+plt.plot(time_list, mean_geral_original, label='original')
+plt.plot(time_list, mean_geral_optmized, label='optmized')
+plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1,
+             fontsize='medium', title='Users_mean', 
+             title_fontsize='large')
+
+plt.title('Mean Delay rate (Original vs Optmized)')
+plt.xlabel('time(s)')
+plt.ylabel('delay (ms)')
+plt.show()
 #%%
 #mean original users
 u1 =  [0.000725] * 7
@@ -23,7 +36,7 @@ uo7 =  [0.000669] * 7
 uo8 =  [0.000687] * 7
 uo9 =  [0.000705] * 7
 uo10 = [0.000722] * 7
-time_list = [0, 10, 20, 30, 40, 50, 60]
+
 # %%
 plt.plot(time_list,u1, label='u1',color ='blue')
 plt.plot(time_list,u2, label='uo2',color ='green')

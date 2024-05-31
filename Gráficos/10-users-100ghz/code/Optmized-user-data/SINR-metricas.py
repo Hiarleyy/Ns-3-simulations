@@ -29,9 +29,23 @@ plt.show()
 
 # %%
 #media geral
-original_data_mean_sinr = 22.718661
-optmized_data_mean_sinr = 31.088927
+original_data_mean_sinr = [22.718661 ] * 7
+optmized_data_mean_sinr = [31.088927 ] * 7
+time_list = [0, 10, 20, 30, 40, 50, 60]
+plt.plot(time_list, original_data_mean_sinr, label='original')
+plt.plot(time_list, optmized_data_mean_sinr, label='optmized')
+plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1,
+             fontsize='medium', title='Users', 
+             title_fontsize='large')
 
+plt.title('Mean SINR Geral (Original vs Optmized)')
+plt.xlabel('time(s)')
+plt.ylabel('SINR(dB)')
+plt.show()
+
+
+
+#%%
 u1 =  [27.9415] * 7
 u2 =  [26.0163] * 7
 u3 =  [26.7339] * 7
@@ -53,7 +67,7 @@ uo7 =  [36.5213] * 7
 uo8 =  [32.5131] * 7
 uo9 =  [30.0734] * 7
 uo10 = [37.9044] * 7
-time_list = [0, 10, 20, 30, 40, 50, 60]
+
 
 plt.plot(time_list,u1, label='u1',color ='blue')
 plt.plot(time_list,u2, label='uo2',color ='green')

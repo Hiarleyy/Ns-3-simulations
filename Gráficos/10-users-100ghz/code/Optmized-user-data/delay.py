@@ -4,7 +4,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 df = pd.read_csv('DlRlcStats.csv', sep=';')
 pd.Series(df['delay'].unique()).value_counts().sum()
-
+#%%
+df['delay'].describe()
 #%%
 # Função para filtrar DataFrame por RNTI e preparar dados para plotagem
 def filter_and_prepare_data(df, rnti_values):
