@@ -15,8 +15,6 @@ rnti_values = range(1, 11)
 times, delays = filter_and_prepare_data(df, rnti_values)
 # Plotando os gráficos
 plt.figure(figsize=(10, 6))
-
-#for rnti in rnti_values:
 plt.plot(times[1], delays[1], label=str(1), color='darkred')
 plt.plot(times[2], delays[2], label=str(2), color='aqua')
 plt.plot(times[3], delays[3], label=str(3), color='darkorange')
@@ -50,8 +48,6 @@ rnti_values = range(1, 11)
 times, delays = filter_and_prepare_data(df, rnti_values)
 # Plotando os gráficos
 plt.figure(figsize=(10, 6))
-
-#for rnti in rnti_values:
 plt.plot(times[1], delays[1], label=str(1), color='darkred')
 plt.plot(times[2], delays[2], label=str(2), color='aqua')
 plt.plot(times[3], delays[3], label=str(3), color='darkorange')
