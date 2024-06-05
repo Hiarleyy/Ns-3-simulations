@@ -10,7 +10,6 @@ def filter_and_prepare_data(df, rnti_values):
     times = {rnti: filtered_dfs[rnti]['% start'] for rnti in rnti_values}
     delays = {rnti: np.where(filtered_dfs[rnti]['delay'] == 0, np.nan, filtered_dfs[rnti]['delay']) for rnti in rnti_values}
     return times, delays
-# Valores de RNTI de 1 a 10
 rnti_values = range(1, 11)
 times, delays = filter_and_prepare_data(df, rnti_values)
 # Plotando os gráficos
