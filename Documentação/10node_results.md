@@ -1,6 +1,6 @@
 
 # 10 Nodes Simulation Results
-![[Pasted image 20240607153029.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/05505141-9641-48a3-a8c6-7af2b5f93aff)
 
 Antenna Position: [250 250]
 
@@ -32,15 +32,16 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 
 ## Original Data Per User
 
-![[Pasted image 20240607153912.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/86d1c816-9241-40db-ad69-9c1c7915611b)
+
 
 ## Optmized Data Per User
 
-![[Pasted image 20240607154013.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/c0bb4107-b84f-45d5-a660-ab8cfc5314ea)
 
 ## Comparison by Priority
 
-![[Pasted image 20240607154051.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/523dab66-1e41-43db-b6ca-e6f9426990f5)
 
 --- 
 
@@ -49,31 +50,36 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 ## Original data per user 
 
 - ### Line
-![[Pasted image 20240607154421.png]]
+
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/c8b62508-f624-484e-a36b-c60f94ed4078)
+
 
 - ### Bar
-![[Pasted image 20240607154444.png]]
+
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/a6fadba8-a9c8-42a3-928e-810b1db3d3a3)
 
 ---
 # Optmized data per user
 
 - ### Line
-![[Pasted image 20240607154513.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/2272e075-ef5c-47da-b399-a95c16a4538f)
+
 - ### Bar
-![[Pasted image 20240607154529.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/3e7baeee-6fb3-49d8-8e1e-436b929bbfa1)
 
 ---
 ## Comparison by priority
 
-![[Pasted image 20240607154622.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/78471a76-8411-441f-a31a-ca6fc9b64c01)
 
 ---
 # Unique delay values by User
 
 ## Original Position
 
-![[Pasted image 20240607154957.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/cb1619fb-a987-42c6-a541-5edc85a82ec4)
 
 ## Optmized Position
 
-![[Pasted image 20240607155018.png]]
+![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/cf3786a0-b548-471f-a23b-95b3a4db4025)
+
