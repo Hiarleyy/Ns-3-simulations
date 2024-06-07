@@ -27,7 +27,7 @@ User 8: Position: [200.27908894 244.72449019], Application Priority: <font color
 User 9: Position: [248.56036069 200.02072991], Application Priority: <font color="#ff0000">high</font>
 User 10: Position: [318.96136855 306.54287198], Application Priority: <font color="#ff0000">high</font>
 
-----
+
 # Métricas de Sinal-Ruido
 
 ## Original Data Per User
@@ -43,7 +43,6 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/523dab66-1e41-43db-b6ca-e6f9426990f5)
 
---- 
 
 # Métricas de Delay
 
@@ -58,7 +57,7 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/a6fadba8-a9c8-42a3-928e-810b1db3d3a3)
 
----
+
 # Optmized data per user
 
 - ### Line
@@ -67,12 +66,12 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 - ### Bar
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/3e7baeee-6fb3-49d8-8e1e-436b929bbfa1)
 
----
+
 ## Comparison by priority
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/78471a76-8411-441f-a31a-ca6fc9b64c01)
 
----
+
 # Unique delay values by User
 
 ## Original Position
