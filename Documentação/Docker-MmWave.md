@@ -1,7 +1,9 @@
+tags: #fleeting #5g #ns3 #project 
+Created:2024-06-20, Thu Jun 4 - 19:31
+Week-number:25
 
-## DockerFile NS3-mmWave:
 
-<img width="150px" align="right" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-original.svg"/>
+## Resumo:
 
 - Foi desenvolvida uma imagem em docker para facilitar a utilização do simulador Ns3, é possível ter acesso a imagem personalizada do projeto em : https://hub.docker.com/r/hiarley/ns3-mmwave/tags
 - Versão do Mmwave : (mmwave-8.0)
@@ -11,7 +13,7 @@
 - Após verificar todos os requisitos de utilização do Docker Desktop, você pode utilizar o seguinte comando para acessar essa imagem:
 
 ```Bash
-docker pull hiarley/ns3-mmwave:latest
+docker pull hiarley/ns3-mmwave
 ```
 -  Para iniciar um container utilizando essa imagem é necessário utilizar o comando ``docker run`` da seguinte forma:
 
@@ -52,7 +54,9 @@ docker exec -it ns3-container bash
 - **GNUplot**: Para geração de gráficos.
 - **Tcpdump**: Para captura e análise de pacotes.
 ## Shellscript Para o NS3
-- A imagem do projeto também adiciona dois arquivos para facilitar o uso do programa:
+- A imagem do projeto também adiciona dois arquivos para facilitar o uso do programa
+	reload.sh -- Renova o arquivo Packet.cc para ser buildado novamente
+	move-files.sh -- Move os arquivos de output para uma pasta chamada dataframe
 ## **Módulos de Desenvolvimento**
 - Ns3-Mmwave: (https://github.com/nyuwireless-unipd/ns3-mmwave) -- **Versão 8.0** 
 - ---
