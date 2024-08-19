@@ -1,5 +1,13 @@
 # 2024/2
 
+## Metas
+Implementar um modelo de mobilidade em duas dimensões que seja capaz de contornar obstáculos e autoconduzir para pontos específicos.
+=> Cenário:
+Antenas: 4
+Usuários:
+Frequência:
+Área:
+
 
 -[x] Implementar modelo walk2d mobility
 -[x] Implementar modelo wlak2d outdoor
