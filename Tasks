@@ -1,3 +1,21 @@
--[/] Implementar modelo walk2d mobility
--[] Implementar modelo wlak2d outdoor
--[ ] Rodou
+-[x] Implementar modelo walk2d mobility
+-[x] Implementar modelo wlak2d outdoor
+-[] Rodou sem bugs aparentes?
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-[] Implementar duas ou mais antenas no modelo
+-[] Rodou sem bugs aparentes?
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+==> Decidir se iremos adotar o modelo de perca de sinal
+se sim:
+      -[] Pesquisar sobre modelos (Há um código salvo no browser)
+      -[] Implementaar modelo escolhido
+      -[] Rodou sem bugs aparentes?
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
