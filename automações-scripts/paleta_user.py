@@ -1,0 +1,10 @@
+user_color = {1:'darkred',
+                2:'aqua',
+                3:'darkorange',
+                4:'fuchsia',
+                5:'red',
+                6:'black',
+                7:'blue',
+                8:'yellow',
+                9:'gray',
+                10:'lime'}
