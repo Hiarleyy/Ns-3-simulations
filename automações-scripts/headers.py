@@ -1,22 +1,37 @@
 #%%
+from re import M
 import pandas as pd
+#%%
+CellIdStats = pd.read_csv('CellIdStats.txt', delimiter=r'\s+', header=None)
+CellIdStats
+#%%
+# Rename the columns
+CellIdStats.columns = ['Time', 'IMSI', 'CellId', 'RNTI']
+CellIdStats
+#%%
+# Save the DataFrame to a CSV file
+CellIdStats.to_csv('CellIdStats.csv', sep=';', index=False)
 
-def process_file(input_file, output_file, column_names):
-    # Ler o arquivo
-    df = pd.read_csv(input_file, delimiter=r'\s+', header=None)
-    # Renomear as colunas
-    df.columns = column_names
-    # Salvar o DataFrame em um arquivo CSV
-    df.to_csv(output_file, sep=';', index=False)
-    return df
+#------------------------------------------------------------
+#%%
+MmWaveSinrTime = pd.read_csv('MmWaveSinrTime.txt', delimiter=r'\s+', header=None)
+MmWaveSinrTime
+# %%
+MmWaveSinrTime.columns = ['Time', 'IMSI', 'CellId', "SINR[dB]"]
+MmWaveSinrTime
 
-# Processar os arquivos
-CellIdStats = process_file('CellIdStats.txt', 'CellIdStats.csv', ['Time', 'IMSI', 'CellId', 'RNTI'])
-MmWaveSinrTime = process_file('MmWaveSinrTime.txt', 'MmWaveSinrTime.csv', ['Time', 'IMSI', 'CellId', "SINR[dB]"])
-MmWaveSwitchStats = process_file('MmWaveSwitchStats.txt', 'MmWaveSwitchStats.csv', ['Text', 'Time', 'IMSI', 'CellId', "RNTI"])
+# %%
+MmWaveSinrTime.to_csv('MmWaveSinrTime.csv', sep=';', index=False)
+#------------------------------------------------------------
+#%%
+MmWaveSwitchStats= pd.read_csv('MmWaveSwitchStats.txt', delimiter=r'\s+', header=None)
+MmWaveSwitchStats
+# %%
+MmWaveSwitchStats.columns = ['Text','Time', 'IMSI', 'CellId', "RNTI"]
+MmWaveSwitchStats
 
-# Exibir os DataFrames
-print(CellIdStats.head())
-print(MmWaveSinrTime.head())
-print(MmWaveSwitchStats.head())
+# %%
+MmWaveSwitchStats.to_csv('MmWaveSwitchStats.csv', sep=';', index=False)
+#------------------------------------------------------------
+
 # %%
