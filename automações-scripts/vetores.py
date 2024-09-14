@@ -91,3 +91,18 @@ for i in range(num_antenas):
     print(f"Antena {i+1}: Posição ({posicoes_antenas_x[i]}, {posicoes_antenas_y[i]})")
 print(f"Área total: X de {area_x_min} a {area_x_max}, Y de {area_y_min} a {area_y_max}")
 print(f"Tempo de simulação: {tempo_simulacao}")
+
+#%%
+# Gráfico de Linhas
+plt.figure(figsize=(10, 10))
+for i in range(num_vetores):
+    pos_final_x = posicoes_iniciais_x[i] + velocidades_x[i] * tempo_simulacao
+    pos_final_y = posicoes_iniciais_y[i] + velocidades_y[i] * tempo_simulacao
+    plt.plot([posicoes_iniciais_x[i], pos_final_x], [posicoes_iniciais_y[i], pos_final_y], label=f'Vetor {i+1}')
+plt.scatter(posicoes_antenas_x, posicoes_antenas_y, color='black', marker='^', s=100, label='Antenas')
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title('Gráfico de Linhas das Trajetórias dos Vetores')
+plt.legend()
+plt.grid()
+plt.show()
