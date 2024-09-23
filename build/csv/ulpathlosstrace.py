@@ -109,6 +109,11 @@ plt.xlabel('Time (sec)')
 plt.tight_layout()
 plt.show()
 # %%
-grouped_df = df.groupby('CellId')['pathLoss(dB)'].describe()
+grouped_df = df.groupby('CellId')['IMSI'].value_counts()
 grouped_df
+# %%
+grouped_df = pd.DataFrame(grouped_df)
+
+# %%
+grouped_df 
 # %%
