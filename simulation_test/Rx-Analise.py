@@ -3,8 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 #%%
-df = pd.read_csv("RxPacketTrace.txt", delimiter=r'\s+')
-df.describe()
+df = pd.read_csv("RxPacketTrace.csv", sep=',')
+df
 
 #%%
 df['rnti'].value_counts()
@@ -23,7 +23,7 @@ plt.figure(figsize=(10, 6))
 
 for rnti in rnti_values:
     user_df = filtered_dfs[rnti]
-    plt.plot(user_df['time'], user_df['SINR(dB)'], label=str(rnti))
+    plt.plot(user_df['Time'], user_df['SINR(dB)'], label=str(rnti))
 
 plt.title('SINR rate (2 users)')
 plt.xlabel('time(s)')
