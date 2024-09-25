@@ -4,27 +4,14 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import pandas as pd
 
-# Função para gerar coordenadas aleatórias
-def generate_random_coordinates(num_vectors, area):
-    x_coords = np.random.uniform(area[0], area[1], num_vectors)
-    y_coords = np.random.uniform(area[2], area[3], num_vectors)
-    return np.column_stack((x_coords, y_coords))
-
-# Função para gerar velocidades aleatórias
-def generate_random_velocities(num_vectors, min_val, max_val, step):
-    velocities = np.random.choice(np.arange(min_val, max_val + step, step), (num_vectors, 2))
-    return velocities
-
 # Função para atualizar as posições dos vetores
 def update_positions(coords, velocities, time_step):
-    new_coords = coords + velocities * time_step
+    new_coords = coords + velocities[:, :2] * time_step  # Garantir que velocities tenha a forma correta
     return new_coords
 
 # Função de animação
 def animate(i, scat, coords, velocities, trajectories, lines, antenna_scat, highlighted_vectors):
-    global time
-    time += 1
-    new_coords = update_positions(coords, velocities, time)
+    new_coords = update_positions(coords, velocities, i)  # Use o índice do frame como time_step
     trajectories.append(new_coords.copy())
     scat.set_offsets(new_coords)
     
@@ -40,9 +27,9 @@ def animate(i, scat, coords, velocities, trajectories, lines, antenna_scat, high
             line.set_linestyle('-')  # Linha contínua
 
 # Função para perguntar sobre vetores a serem destacados
-def ask_for_highlighted_vectors(static_params):
+def ask_for_highlighted_vectors(ue_params):
     highlighted_vectors = []
-    vector_names = [key for key in static_params.keys() if key.startswith('UE')]
+    vector_names = list(ue_params.keys())
     vector_indices = {name: i for i, name in enumerate(vector_names)}
     
     while True:
@@ -55,246 +42,155 @@ def ask_for_highlighted_vectors(static_params):
                 if vector_indices[name] not in highlighted_vectors:
                     print(f"{name}: índice {vector_indices[name] + 1}")
             vector_number = int(input("Digite o número do vetor a ser destacado: ").strip())
-            vector_name = f'UE_{vector_number}'
+            vector_name = f'UE{vector_number}'
             if vector_name in vector_indices and vector_indices[vector_name] not in highlighted_vectors:
                 highlighted_vectors.append(vector_indices[vector_name])
+                vector_names.remove(vector_name)  # Remover vetor selecionado da lista
             else:
                 print("Número do vetor inválido ou já selecionado. Tente novamente.")
         else:
             print("Resposta inválida. Por favor, responda 's' ou 'n'.")
     return highlighted_vectors
 
-# Perguntar ao usuário se ele prefere valores interativos ou estáticos
-use_static_params = input("Você prefere usar parâmetros estáticos? (s/n): ").strip().lower() == 's'
+# Parâmetros estáticos
+static_params = {
+    'antenna1': (100, 100), 
+    'antenna2': (-100, -100),
+    'min_x': -300,
+    'max_x': 300,
+    'min_y': -300,
+    'max_y': 300,
+    'simulation_time': 60,
+}
 
-if use_static_params:
-    # Parâmetros estáticos
-    static_params = {
-        'antenna1': (0, 0), 
-        'antenna2': (0, 80),
-        'num_vectors': 5,
-        'min_x': -300,
-        'max_x': 300,
-        'min_y': -300,
-        'max_y': 300,
-        'simulation_time': 60,
-        'UE_1': (-18, -18, -3, -5),
-        'UE_2': (2, 6, -4, -3),
-        'UE_3': (-6, 44, -3, -3),
-        'UE_4': (15, -31, -2, -4),
-        'UE_5': (-49, -45, -3, -4),
-    }
+# Parâmetros dos usuários UE
+ue_params = {
+    'UE0': (23, -74, 1.5, -1, -1), # (x, y, vx, vy)
+    'UE1': (33, 15, 1.5, -20, -20),
+    'UE2': (-71, 61, 1.5, -2, -1),
+    'UE3': (-30, -21, 1.5, -1, -2),
+    'UE4': (-20, -14, 1.5, -2, -2),
+    'UE5': (11, -72, 1.5, -1, -1),
+    'UE6': (-58, 10, 1.5, -2, -1),
+    'UE7': (67, 15, 1.5, -1, -2),
+    'UE8': (22, -62, 1.5, -1, -1),
+    'UE9': (33, -24, 1.5, -1, -2),
+    'UE10': (-11, 13, 1.5, -1, -1),
+    'UE11': (-56, 57, 1.5, -2, -2),
+    'UE12': (-5, -30, 1.5, -1, -2),
+    'UE13': (11, -60, 1.5, -2, -1),
+    'UE14': (62, 50, 1.5, -2, -1),
+    'UE15': (-15, 45, 1.5, -2, -1),
+    'UE16': (-64, 25, 1.5, -2, -1),
+    'UE17': (-47, 17, 1.5, -2, -1),
+    'UE18': (-18, -15, 1.5, -2, -1),
+    'UE19': (-6, 44, 1.5, -1, -2),
+    'UE20': (-33, 8, 1.5, -2, -2),
+    'UE21': (28, 64, 1.5, -1, -1),
+    'UE22': (34, -1, 1.5, -2, -2),
+    'UE23': (-4, 8, 1.5, -1, -2),
+    'UE24': (-14, -54, 1.5, -2, -1),
+    'UE25': (75, 10, 1.5, -2, -2),
+    'UE26': (-53, -39, 1.5, -1, -2),
+    'UE27': (-43, 12, 1.5, -2, -2),
+    'UE28': (-59, 40, 1.5, -2, -1),
+    'UE29': (25, 9, 1.5, -2, -1),
+}
 
-    # Converter posições das antenas para numpy array
-    antenna_positions = np.array([static_params['antenna1'], static_params['antenna2']])
+# Converter posições das antenas para numpy array
+antenna_positions = np.array([static_params['antenna1'], static_params['antenna2']])
 
-    # Definir área e gerar velocidades aleatórias
-    area = (static_params['min_x'], static_params['max_x'], static_params['min_y'], static_params['max_y'])
-    
-    # Extrair coordenadas e velocidades dos usuários
-    coords = np.array([static_params['UE_1'][:2], static_params['UE_2'][:2], static_params['UE_3'][:2], static_params['UE_4'][:2], static_params['UE_5'][:2]])
-    velocities = np.array([static_params['UE_1'][2:], static_params['UE_2'][2:], static_params['UE_3'][2:], static_params['UE_4'][2:], static_params['UE_5'][2:]])
+# Definir área e gerar velocidades aleatórias
+area = (static_params['min_x'], static_params['max_x'], static_params['min_y'], static_params['max_y'])
 
-    # Perguntar sobre vetores a serem destacados
-    highlighted_vectors = ask_for_highlighted_vectors(static_params)
+# Extrair coordenadas e velocidades dos usuários
+coords = np.array([ue_params[key][:2] for key in ue_params])
+velocities = np.array([ue_params[key][2:] for key in ue_params])
 
-    # Configurar animação
-    fig, ax = plt.subplots()
-    colors = plt.cm.jet(np.linspace(0, 1, static_params['num_vectors']))
-    scat = ax.scatter(coords[:, 0], coords[:, 1], c=colors)
-    antenna_scat = ax.scatter(antenna_positions[:, 0], antenna_positions[:, 1], color='red', marker='x', label='Antenas')
-    trajectories = [coords.copy()]
+# Perguntar sobre vetores a serem destacados
+highlighted_vectors = ask_for_highlighted_vectors(ue_params)
 
-    # Criar linhas para trajetórias
-    lines = [ax.plot([], [], color=colors[j], alpha=0.5)[0] for j in range(static_params['num_vectors'])]
+# Configurar animação
+fig, ax = plt.subplots()
+colors = plt.cm.jet(np.linspace(0, 1, len(coords)))  # Ajustar para usar o comprimento de coords
+scat = ax.scatter(coords[:, 0], coords[:, 1], c=colors)
+antenna_scat = ax.scatter(antenna_positions[:, 0], antenna_positions[:, 1], color='red', marker='x', label='Antenas')
+trajectories = [coords.copy()]
 
-    time = 0
-    ani = animation.FuncAnimation(fig, animate, fargs=(scat, coords, velocities, trajectories, lines, antenna_scat, highlighted_vectors), frames=static_params['simulation_time'], interval=100, repeat=False)
+# Criar linhas para trajetórias
+lines = [ax.plot([], [], color=colors[j], alpha=0.5)[0] for j in range(len(coords))]
 
-    plt.xlim(static_params['min_x'], static_params['max_x'])
-    plt.ylim(static_params['min_y'], static_params['max_y'])
+ani = animation.FuncAnimation(fig, animate, fargs=(scat, coords, velocities, trajectories, lines, antenna_scat, highlighted_vectors), frames=static_params['simulation_time'], interval=100, repeat=False)
 
-    # Adicionar legendas para os vetores
-    for i in range(static_params['num_vectors']):
-        plt.scatter([], [], color=colors[i], label=f'Vetor {i+1}')
-    plt.legend()
-    plt.show()
+plt.xlim(static_params['min_x'], static_params['max_x'])
+plt.ylim(static_params['min_y'], static_params['max_y'])
 
-    # Plotar gráfico final com trajetórias dos vetores
-    fig, ax = plt.subplots()
+# Adicionar legendas para os vetores
+for i in range(len(coords)):
+    plt.scatter([], [], color=colors[i], label=f'Vetor {i+1}')
+plt.legend()
+plt.show()
 
-    # Desenhar trajetórias com cores diferentes
-    for j in range(static_params['num_vectors']):
-        traj = np.array([t[j] for t in trajectories])
-        ax.plot(traj[:, 0], traj[:, 1], color=colors[j], label=f'Vetor {j+1}', linewidth=2.5 if j in highlighted_vectors else 1.0, linestyle='--' if j in highlighted_vectors else '-')
+# Plotar gráfico final com trajetórias dos vetores
+fig, ax = plt.subplots()
 
-    # Mostrar antenas no gráfico final
-    ax.scatter(antenna_positions[:, 0], antenna_positions[:, 1], color='red', marker='x', label='Antenas')
+# Desenhar trajetórias com cores diferentes
+for j in range(len(coords)):
+    traj = np.array([t[j] for t in trajectories])
+    ax.plot(traj[:, 0], traj[:, 1], color=colors[j], label=f'Vetor {j+1}', linewidth=2.5 if j in highlighted_vectors else 1.0, linestyle='--' if j in highlighted_vectors else '-')
 
-    plt.xlim(static_params['min_x'], static_params['max_x'])
-    plt.ylim(static_params['min_y'], static_params['max_y'])
-    plt.title('Trajetórias dos Vetores')
-    plt.legend()
-    plt.show()
+# Mostrar antenas no gráfico final
+ax.scatter(antenna_positions[:, 0], antenna_positions[:, 1], color='red', marker='x', label='Antenas')
 
-    # Calcular o tempo que os vetores ficam dentro do range de espaço definido
-    def calculate_time_in_range(trajectories, area):
-        time_in_range = []
-        for traj in trajectories:
-            count = 0
-            for pos in traj:
-                if area[0] <= pos[0] <= area[1] and area[2] <= pos[1] <= area[3]:
-                    count += 1
-            time_in_range.append(count)
-        return time_in_range
+plt.xlim(static_params['min_x'], static_params['max_x'])
+plt.ylim(static_params['min_y'], static_params['max_y'])
+plt.title('Trajetórias dos Vetores')
+plt.legend()
+plt.show()
 
-    # Obter as posições finais dos vetores
-    final_positions = trajectories[-1]
+# Calcular o tempo que os vetores ficam dentro do range de espaço definido
+def calculate_time_in_range(trajectories, area):
+    num_vectors = len(trajectories[0])
+    time_in_range = [0] * num_vectors
+    for traj in trajectories:
+        for i, pos in enumerate(traj):
+            if area[0] <= pos[0] <= area[1] and area[2] <= pos[1] <= area[3]:
+                time_in_range[i] += 1
+    return time_in_range
 
-    # Calcular o tempo que os vetores ficam dentro do range
-    time_in_range = calculate_time_in_range(trajectories, area)
+# Obter as posições finais dos vetores
+final_positions = trajectories[-1]
 
-    # Criar DataFrame com as informações dos vetores
-    vector_data = {
-        'Nome do Vetor': [f'Vetor {i+1}' for i in range(static_params['num_vectors'])],
-        'Posição Inicial': [coords[i].tolist() for i in range(static_params['num_vectors'])],
-        'Posição Final': [final_positions[i].tolist() for i in range(static_params['num_vectors'])],
-        'Velocidade': [velocities[i].tolist() for i in range(static_params['num_vectors'])],
-        'Tempo no Range': time_in_range
-    }
+# Calcular o tempo que os vetores ficam dentro do range
+time_in_range = calculate_time_in_range(trajectories, area)
 
-    vector_df = pd.DataFrame(vector_data)
+# Criar DataFrame com as informações dos vetores
+vector_data = {
+    'Nome do Vetor': [f'Vetor {i+1}' for i in range(len(coords))],
+    'Posição Inicial': [coords[i].tolist() for i in range(len(coords))],
+    'Posição Final': [final_positions[i].tolist() for i in range(len(coords))],
+    'Velocidade': [velocities[i].tolist() for i in range(len(coords))],
+    'Tempo no Range': time_in_range
+}
 
-    # Criar DataFrame com as informações das antenas
-    antenna_data = {
-        'Nome da Antena': [f'Antenna {i+1}' for i in range(len(antenna_positions))],
-        'Posição': [antenna_positions[i].tolist() for i in range(len(antenna_positions))],
-        'Velocidade': [[0, 0] for _ in range(len(antenna_positions))]
-    }
+vector_df = pd.DataFrame(vector_data)
 
-    antenna_df = pd.DataFrame(antenna_data)
+# Criar DataFrame com as informações das antenas
+antenna_data = {
+    'Nome da Antena': [f'Antenna {i+1}' for i in range(len(antenna_positions))],
+    'Posição': [antenna_positions[i].tolist() for i in range(len(antenna_positions))],
+    'Velocidade': [[0, 0] for _ in range(len(antenna_positions))]
+}
 
-    # Exibir DataFrames
-    print("Informações dos Vetores:")
-    print(vector_df)
-    print("\nInformações das Antenas:")
-    print(antenna_df)
+antenna_df = pd.DataFrame(antenna_data)
 
-else:
-    # Código interativo original
-    num_antennas = int(input("Digite o número de antenas: "))
-    antenna_positions = []
-    for i in range(num_antennas):
-        antenna_x = float(input(f"Digite a posição x da antena {i+1}: "))
-        antenna_y = float(input(f"Digite a posição y da antena {i+1}: "))
-        antenna_positions.append((antenna_x, antenna_y))
-    
-    num_vectors = int(input("Digite o número de vetores: "))
-    min_x = float(input("Digite o valor mínimo de x: "))
-    max_x = float(input("Digite o valor máximo de x: "))
-    min_y = float(input("Digite o valor mínimo de y: "))
-    max_y = float(input("Digite o valor máximo de y: "))
-    simulation_time = int(input("Digite o tempo de simulação: "))
-    
-    velocities = []
-    for i in range(num_vectors):
-        vel_x = float(input(f"Digite a velocidade em x do vetor {i+1}: "))
-        vel_y = float(input(f"Digite a velocidade em y do vetor {i+1}: "))
-        velocities.append((vel_x, vel_y))
-    
-    antenna_positions = np.array(antenna_positions)
-    area = (min_x, max_x, min_y, max_y)
-    velocities = np.array(velocities)
-    coords = generate_random_coordinates(num_vectors, area)
+# Salvar DataFrames em arquivos CSV
+vector_df.to_csv('vector_data.csv', index=False)
+antenna_df.to_csv('antenna_data.csv', index=False)
 
-    # Perguntar sobre vetores a serem destacados
-    highlighted_vectors = []
-    while True:
-        highlight = input("Deseja destacar algum vetor? (s/n): ").strip().lower()
-        if highlight == 'n':
-            break
-        elif highlight == 's':
-            vector_index = int(input(f"Digite o índice do vetor a ser destacado (0 a {num_vectors-1}): "))
-            highlighted_vectors.append(vector_index)
-        else:
-            print("Resposta inválida. Por favor, responda 's' ou 'n'.")
-
-    fig, ax = plt.subplots()
-    colors = plt.cm.jet(np.linspace(0, 1, num_vectors))
-    scat = ax.scatter(coords[:, 0], coords[:, 1], c=colors)
-    antenna_scat = ax.scatter(antenna_positions[:, 0], antenna_positions[:, 1], color='red', marker='x', label='Antenas')
-    trajectories = [coords.copy()]
-
-    lines = [ax.plot([], [], color=colors[j], alpha=0.5)[0] for j in range(num_vectors)]
-
-    time = 0
-    ani = animation.FuncAnimation(fig, animate, fargs=(scat, coords, velocities, trajectories, lines, antenna_scat, highlighted_vectors), frames=simulation_time, interval=100, repeat=False)
-
-    plt.xlim(min_x, max_x)
-    plt.ylim(min_y, max_y)
-
-    # Adicionar legendas para os vetores
-    for i in range(num_vectors):
-        plt.scatter([], [], color=colors[i], label=f'Vetor {i+1}')
-    plt.legend()
-    plt.show()
-
-    fig, ax = plt.subplots()
-    for j in range(num_vectors):
-        traj = np.array([t[j] for t in trajectories])
-        ax.plot(traj[:, 0], traj[:, 1], color=colors[j], label=f'Vetor {j+1}', linewidth=2.5 if j in highlighted_vectors else 1.0, linestyle='--' if j in highlighted_vectors else '-')
-
-    ax.scatter(antenna_positions[:, 0], antenna_positions[:, 1], color='red', marker='x', label='Antenas')
-
-    plt.xlim(min_x, max_x)
-    plt.ylim(min_y, max_y)
-    plt.title('Trajetórias dos Vetores')
-    plt.legend()
-    plt.show()
-
-    # Calcular o tempo que os vetores ficam dentro do range de espaço definido
-    def calculate_time_in_range(trajectories, area):
-        time_in_range = []
-        for traj in trajectories:
-            count = 0
-            for pos in traj:
-                if area[0] <= pos[0] <= area[1] and area[2] <= pos[1] <= area[3]:
-                    count += 1
-            time_in_range.append(count)
-        return time_in_range
-
-    # Obter as posições finais dos vetores
-    final_positions = trajectories[-1]
-
-    # Calcular o tempo que os vetores ficam dentro do range
-    time_in_range = calculate_time_in_range(trajectories, area)
-
-    # Criar DataFrame com as informações dos vetores
-    vector_data = {
-        'Nome do Vetor': [f'Vetor {i+1}' for i in range(num_vectors)],
-        'Posição Inicial': [coords[i].tolist() for i in range(num_vectors)],
-        'Posição Final': [final_positions[i].tolist() for i in range(num_vectors)],
-        'Velocidade': [velocities[i].tolist() for i in range(num_vectors)],
-        'Tempo no Range': time_in_range
-    }
-
-    vector_df = pd.DataFrame(vector_data)
-
-    # Criar DataFrame com as informações das antenas
-    antenna_data = {
-        'Nome da Antena': [f'Antenna {i+1}' for i in range(len(antenna_positions))],
-        'Posição': [antenna_positions[i].tolist() for i in range(len(antenna_positions))],
-        'Velocidade': [[0, 0] for _ in range(len(antenna_positions))]
-    }
-
-    antenna_df = pd.DataFrame(antenna_data)
-
-    # Exibir DataFrames
-    print("Informações dos Vetores:")
-    print(vector_df)
-    print("\nInformações das Antenas:")
-    print(antenna_df)
-
-
-antenna_data.to_csv('antenna_data.csv', sep=';', index=False)
-
+# Exibir DataFrames
+print("Informações dos Vetores:")
+print(vector_df)
+print("\nInformações das Antenas:")
+print(antenna_df)
+# %%
