@@ -214,22 +214,23 @@ def plot_positions_vs_time(trajectories, antenna_positions, num_users_per_plot=5
         end_idx = min(start_idx + num_users_per_plot, num_users)
 
         for user_idx in range(start_idx, end_idx):
-            distances = []
+            distances = {antenna_idx: [] for antenna_idx in range(len(antenna_positions))}
             for t in range(len(trajectories)):
                 pos = trajectories[t][user_idx]
-                min_distance = min(calculate_distance(pos, antenna) for antenna in antenna_positions)
-                max_distance = max(calculate_distance(pos, antenna) for antenna in antenna_positions)
-                distances.append((min_distance, max_distance))
+                for antenna_idx, antenna in enumerate(antenna_positions):
+                    distance = calculate_distance(pos, antenna)
+                    distances[antenna_idx].append(distance)
 
-            min_distances = [d[0] for d in distances]
-            max_distances = [d[1] for d in distances]
-            ax.plot(range(len(trajectories)), min_distances, label=f'Vetor {user_idx+1} (Min Distância: {min(min_distances):.2f})')
-            ax.plot(range(len(trajectories)), max_distances, label=f'Vetor {user_idx+1} (Max Distância: {max(max_distances):.2f})')
+            for antenna_idx in distances:
+                min_distance = min(distances[antenna_idx])
+                max_distance = max(distances[antenna_idx])
+                ax.plot(range(len(trajectories)), distances[antenna_idx], label=f'Vetor {user_idx+1} Antena {antenna_idx+1} (Min: {min_distance:.2f}, Max: {max_distance:.2f})')
 
         ax.set_xlabel('Tempo')
         ax.set_ylabel('Distância')
         ax.set_title(f'Posições em relação às Antenas (Usuários {start_idx+1} a {end_idx})')
-        ax.legend()
+        ax.legend(loc='upper left', bbox_to_anchor=(1, 1), fontsize='small')
+        plt.tight_layout()
         plt.show()
 
 # Plotar gráficos de posições em relação às antenas
