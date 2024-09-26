@@ -54,8 +54,8 @@ def ask_for_highlighted_vectors(ue_params):
 
 # Parâmetros estáticos
 static_params = {
-    'antenna1': (100, 100), 
-    'antenna2': (-100, -100),
+    'antenna1': (0, 0), 
+    'antenna2': (0, 80),
     'min_x': -300,
     'max_x': 300,
     'min_y': -300,
@@ -65,36 +65,36 @@ static_params = {
 
 # Parâmetros dos usuários UE
 ue_params = {
-    'UE0': (23, -74,  -1, -1.1), # (x, y, vx, vy)
-    'UE1': (33, 15,  -20, -20),
-    'UE2': (-71, 61,  -2, -1),
-    'UE3': (-30, -21,  -1, -2),
-    'UE4': (-20, -14,  -2, -2),
-    'UE5': (11, -72,  -1, -1),
-    'UE6': (-58, 10,  -2, -1),
-    'UE7': (67, 15,  -1, -2),
-    'UE8': (22, -62,  -1, -1),
-    'UE9': (33, -24,  -1, -2),
-    'UE10': (-11, 13,  -1, -1),
-    'UE11': (-56, 57,  -2, -2),
-    'UE12': (-5, -30,  -1, -2),
-    'UE13': (11, -60,  -2, -1),
-    'UE14': (62, 50,  -2, -1),
-    'UE15': (-15, 45,  -2, -1),
-    'UE16': (-64, 25,  -2, -1),
-    'UE17': (-47, 17,  -2, -1),
-    'UE18': (-18, -15,  -2, -1),
-    'UE19': (-6, 44,  -1, -2),
-    'UE20': (-33, 8,  -2, -2),
-    'UE21': (28, 64,  -1, -1),
-    'UE22': (34, -1,  -2, -2),
-    'UE23': (-4, 8,  -1, -2),
-    'UE24': (-14, -54,  -2, -1),
-    'UE25': (75, 10,  -2, -2),
-    'UE26': (-53, -39,  -1, -2),
-    'UE27': (-43, 12,  -2, -2),
-    'UE28': (-59, 40,  -2, -1),
-    'UE29': (25, 9,  -2, -1),
+    'UE0': (23, -74, -30, -1),
+    'UE1': (33, 15, -2, -2),
+    'UE2': (-71, 61, -2, -1),
+    'UE3': (-30, -21, -1, -2),
+    'UE4': (-20, -14, -2, -2),
+    'UE5': (11, -72, -1, -1),
+    'UE6': (-58, 10, -2, -1),
+    'UE7': (67, 15, -1, -2),
+    'UE8': (22, -62, -1, -1),
+    'UE9': (33, -24, -1, -2),
+    'UE10': (-11, 13, -1, -1),
+    'UE11': (-56, 57, -2, -2),
+    'UE12': (-5, -30, -1, -2),
+    'UE13': (11, -60, -2, -1),
+    'UE14': (62, 50, -2, -1),
+    'UE15': (-15, 45, -2, -1),
+    'UE16': (-64, 25, -2, -1),
+    'UE17': (-47, 17, -2, -1),
+    'UE18': (-18, -15, -2, -1),
+    'UE19': (-6, 44, -1, -2),
+    'UE20': (-33, 8, -2, -2),
+    'UE21': (28, 64, -1, -1),
+    'UE22': (34, -1, -2, -2),
+    'UE23': (-4, 8, -1, -2),
+    'UE24': (-14, -54, -2, -1),
+    'UE25': (75, 10, -2, -2),
+    'UE26': (-53, -39, -1, -2),
+    'UE27': (-43, 12, -2, -2),
+    'UE28': (-59, 40, -2, -1),
+    'UE29': (25, 9, -2, -1),
 }
 
 # Converter posições das antenas para numpy array
@@ -149,20 +149,25 @@ plt.legend()
 plt.show()
 
 # Calcular o tempo que os vetores ficam dentro do range de espaço definido
-def calculate_time_in_range(trajectories, area):
-    num_vectors = len(trajectories[0])
+def calculate_time_in_range(coords, velocities, area, simulation_time):
+    num_vectors = len(coords)
     time_in_range = [0] * num_vectors
-    for traj in trajectories:
-        for i, pos in enumerate(traj):
+    time_step = 1  # Assumindo que cada frame representa 1 unidade de tempo
+
+    for t in range(simulation_time):
+        new_coords = update_positions(coords, velocities, time_step)
+        for i, pos in enumerate(new_coords):
             if area[0] <= pos[0] <= area[1] and area[2] <= pos[1] <= area[3]:
-                time_in_range[i] += 1
+                time_in_range[i] += time_step
+        coords = new_coords  # Atualizar as coordenadas para o próximo passo de tempo
+
     return time_in_range
+
+# Calcular o tempo que os vetores ficam dentro do range
+time_in_range = calculate_time_in_range(coords.copy(), velocities, area, static_params['simulation_time'])
 
 # Obter as posições finais dos vetores
 final_positions = trajectories[-1]
-
-# Calcular o tempo que os vetores ficam dentro do range
-time_in_range = calculate_time_in_range(trajectories, area)
 
 # Criar DataFrame com as informações dos vetores
 vector_data = {
@@ -193,4 +198,41 @@ print("Informações dos Vetores:")
 print(vector_df)
 print("\nInformações das Antenas:")
 print(antenna_df)
+
+# Função para calcular a distância entre dois pontos
+def calculate_distance(point1, point2):
+    return np.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
+
+# Função para plotar gráficos de posições em relação às antenas
+def plot_positions_vs_time(trajectories, antenna_positions, num_users_per_plot=5):
+    num_users = len(trajectories[0])
+    num_plots = (num_users + num_users_per_plot - 1) // num_users_per_plot  # Calcular o número de gráficos necessários
+
+    for plot_idx in range(num_plots):
+        fig, ax = plt.subplots()
+        start_idx = plot_idx * num_users_per_plot
+        end_idx = min(start_idx + num_users_per_plot, num_users)
+
+        for user_idx in range(start_idx, end_idx):
+            distances = {antenna_idx: [] for antenna_idx in range(len(antenna_positions))}
+            for t in range(len(trajectories)):
+                pos = trajectories[t][user_idx]
+                for antenna_idx, antenna in enumerate(antenna_positions):
+                    distance = calculate_distance(pos, antenna)
+                    distances[antenna_idx].append(distance)
+
+            for antenna_idx in distances:
+                min_distance = min(distances[antenna_idx])
+                max_distance = max(distances[antenna_idx])
+                ax.plot(range(len(trajectories)), distances[antenna_idx], label=f'Vetor {user_idx+1} Antena {antenna_idx+1} (Min: {min_distance:.2f}, Max: {max_distance:.2f})')
+
+        ax.set_xlabel('Tempo')
+        ax.set_ylabel('Distância')
+        ax.set_title(f'Posições em relação às Antenas (Usuários {start_idx+1} a {end_idx})')
+        ax.legend(loc='upper left', bbox_to_anchor=(1, 1), fontsize='small')
+        plt.tight_layout()
+        plt.show()
+
+# Plotar gráficos de posições em relação às antenas
+plot_positions_vs_time(trajectories, antenna_positions, num_users_per_plot=5)
 # %%
