@@ -174,7 +174,6 @@ plt.legend()
 plt.show()
 
 #%%
-
 import pandas as pd
 
 df = pd.read_csv('trajectories.csv')
@@ -190,3 +189,4 @@ Init_sim[['User','Dist_Ant1','Dist_Ant2','Dist_Ant3','Dist_Ant4']]
 #%%
 
 grouped = df.groupby('User')[['Dist_Ant1', 'Dist_Ant2', 'Dist_Ant3', 'Dist_Ant4']].min()
+# %%
