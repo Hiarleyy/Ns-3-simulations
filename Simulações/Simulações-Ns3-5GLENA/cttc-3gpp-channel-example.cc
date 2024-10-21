@@ -16,7 +16,8 @@
  * The output of this example are default NR trace files that can be found in
  * the root ns-3 project folder.
  */
-
+#include <cstdlib> 
+#include <fstream>
 #include "ns3/applications-module.h"
 #include "ns3/config-store.h"
 #include "ns3/core-module.h"
@@ -31,8 +32,25 @@
 #include "ns3/point-to-point-helper.h"
 #include <ns3/antenna-module.h>
 #include <ns3/buildings-helper.h>
+#include "ns3/netanim-module.h"
 
 using namespace ns3;
+std::ofstream UE_position; // Declarar variável global para o arquivo
+
+
+void MonitorarPosicao (Ptr<Node> ueNode, uint32_t indiceUE) {
+    Ptr<MobilityModel> mobModel = ueNode->GetObject<MobilityModel>();
+    Vector pos = mobModel->GetPosition();
+    
+    // Capturar o tempo atual da simulação
+    double tempo = Simulator::Now().GetSeconds();
+    UE_position << tempo 
+                   << "," << indiceUE 
+                   << "," << pos.x << "," << pos.y << ", " << pos.z << std::endl;
+    
+    // Reagendar a função para ser chamada novamente em 1 segundo
+    Simulator::Schedule(Seconds(0.01), &MonitorarPosicao, ueNode, indiceUE);
+}
 
 int
 main(int argc, char* argv[])
@@ -40,11 +58,10 @@ main(int argc, char* argv[])
     std::string scenario = "UMa"; // scenario
     double frequency = 28e9;      // central frequency
     double bandwidth = 100e6;     // bandwidth
-    double mobility = true;      // whether to enable mobility
-    double simTime = 60;           // in second
+    std::string mobility = "movimento-automatico";      // whether to enable mobility
+    double simTime = 10;           // in second
     double speed = 4;             // in m/s for walking UT.
     bool logging = true; // whether to enable logging from the simulation, another option is by
-                         // exporting the NS_LOG environment variable
     double hBS;          // base station antenna height in meters
     double hUT;          // user antenna height in meters
     double txPower = 40; // txPower
@@ -69,7 +86,7 @@ main(int argc, char* argv[])
         // LogComponentEnable ("ThreeGppSpectrumPropagationLossModel", LOG_LEVEL_ALL);
         LogComponentEnable("ThreeGppPropagationLossModel", LOG_LEVEL_ALL);
         // LogComponentEnable ("ThreeGppChannelModel", LOG_LEVEL_ALL);
-        // LogComponentEnable ("ChannelConditionModel", LOG_LEVEL_ALL);
+        LogComponentEnable ("ChannelConditionModel", LOG_LEVEL_ALL);
         // LogComponentEnable ("UdpClient", LOG_LEVEL_INFO);
         // LogComponentEnable ("UdpServer", LOG_LEVEL_INFO);
         // LogComponentEnable ("LteRlcUm", LOG_LEVEL_LOGIC);
@@ -125,50 +142,69 @@ main(int argc, char* argv[])
     NodeContainer enbNodes;
     NodeContainer ueNodes;
     enbNodes.Create(2);
-    ueNodes.Create(3);
+    ueNodes.Create(4);
 
     // position the base stations
     Ptr<ListPositionAllocator> enbPositionAlloc = CreateObject<ListPositionAllocator>();
-    enbPositionAlloc->Add(Vector(0.0, 0.0, hBS));
-    enbPositionAlloc->Add(Vector(0.0, 80.0, hBS));
+    enbPositionAlloc->Add(Vector(100,100,hBS));
+    enbPositionAlloc->Add(Vector(-100,-100, hBS));
     MobilityHelper enbmobility;
     enbmobility.SetMobilityModel("ns3::ConstantPositionMobilityModel");
     enbmobility.SetPositionAllocator(enbPositionAlloc);
     enbmobility.Install(enbNodes);
 
-    // position the mobile terminals and enable the mobility
+    
+    //monitoramento de posição
+    UE_position.open("posicoes.txt");
+    UE_position << "Tempo(ms),UE,PosX,PosY,PosZ" << std::endl;
+
     MobilityHelper uemobility;
     uemobility.SetMobilityModel("ns3::ConstantVelocityMobilityModel");
     uemobility.Install(ueNodes);
 
-    if (mobility)
-    {
-        ueNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(
-            Vector(90, 15, hUT)); // (x, y, z) in m
-        ueNodes.Get(0)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(
-            Vector(0, speed, 0)); // move UE1 along the y axis
-
-        ueNodes.Get(1)->GetObject<MobilityModel>()->SetPosition(
-            Vector(30, 50.0, hUT)); // (x, y, z) in m
-        ueNodes.Get(1)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(
-            Vector(-speed, 0, 0)); // move UE2 along the x axis
-
-              ueNodes.Get(2)->GetObject<MobilityModel>()->SetPosition(
-            Vector(30, 50.0, hUT)); // (x, y, z) in m
-        ueNodes.Get(2)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(
-            Vector(-speed, 0, 0)); // move UE2 along the x axis
+    for (uint32_t i = 0; i < ueNodes.GetN (); ++i) {
+    Ptr<Node> ueNode = ueNodes.Get(i);
+    Simulator::Schedule(Seconds(0.01), &MonitorarPosicao, ueNode, i); 
     }
-    else
+
+
+    if (mobility == "movimento-automatico")
     {
+            for (uint32_t u = 0; u < ueNodes.GetN(); ++u)
+            {
+
+            double x = (rand() % 160) - 80; // Gera um valor aleatório entre -50 e 50 para x
+            double y = (rand() % 160) - 80; // Gera um valor aleatório entre -50 e 50 para y
+            double speed_x = (rand() % 2) - 2; 
+            double speed_y = (rand() % 2) - 2; 
+            ueNodes.Get(u)->GetObject<MobilityModel>()->SetPosition(
+            Vector(x, y, hUT)); // (x, y, z) in m
+            ueNodes.Get(u)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(
+            Vector(speed_x, speed_y, 0)); // move UE1 along the y axis
+            }
+    }
+    else if (mobility == "estatico-automatico")
+    {
+            for (uint32_t u = 0; u < ueNodes.GetN(); ++u)
+            {
+            double x = (rand() % 101) - 50; // Gera um valor aleatório entre -50 e 50 para x
+            double y = (rand() % 101) - 50; // Gera um valor aleatório entre -50 e 50 para y
+            ueNodes.Get(u)->GetObject<MobilityModel>()->SetPosition(Vector(x, y, hUT));
+            ueNodes.Get(u)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(Vector(0, 0, 0));
+            }
+    }
+    else if (mobility == "Definida-estatico"){
+        
         ueNodes.Get(0)->GetObject<MobilityModel>()->SetPosition(Vector(90, 15, hUT));
         ueNodes.Get(0)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(Vector(0, 0, 0));
 
         ueNodes.Get(1)->GetObject<MobilityModel>()->SetPosition(Vector(30, 50.0, hUT));
         ueNodes.Get(1)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(Vector(0, 0, 0));
-
-        
-        ueNodes.Get(2)->GetObject<MobilityModel>()->SetPosition(Vector(30, 50.0, hUT));
-        ueNodes.Get(2)->GetObject<ConstantVelocityMobilityModel>()->SetVelocity(Vector(0, 0, 0));
+    }
+ 
+    else
+    {
+        NS_ABORT_MSG("Modelo de mobilidade não definido. Escolha entre 'movimento-automatico', 'estatico-automatico', 'Definida-estatico' e 'Definida-movimento'.");
     }
 
     /*
@@ -314,14 +350,19 @@ main(int argc, char* argv[])
 
     // enable the traces provided by the nr module
     nrHelper->EnableTraces();
-
+    AnimationInterface anim ("TESTANDO.xml");
+    
     Simulator::Stop(Seconds(simTime));
     Simulator::Run();
 
     Ptr<UdpServer> serverApp = serverApps.Get(0)->GetObject<UdpServer>();
     uint64_t receivedPackets = serverApp->GetReceived();
+    
+    //Animation Interface
+    
 
     Simulator::Destroy();
+    UE_position.close();
 
     if (receivedPackets == 10)
     {
