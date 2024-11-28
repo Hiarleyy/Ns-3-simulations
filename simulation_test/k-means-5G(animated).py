@@ -1,31 +1,33 @@
 import numpy as np
-import matplotlib.pyplot as plt#
+import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from scipy.spatial import distance_matrix
 
 # Coordenadas fixas das antenas
-antenas = np.array([
-    [-23.5, -46.6],
-    [-23.55, -46.65],
-    [-23.52, -46.52]
-])
+# Coordenadas das antenas com base no tamanho de simulação atual
+num_antennas = 2
+simulation_bounds = (-300, 300)
+antenas = np.column_stack((
+    np.random.uniform(simulation_bounds[0], simulation_bounds[1], num_antennas),
+    np.random.uniform(simulation_bounds[0], simulation_bounds[1], num_antennas)
+))
 
 # Gerar posições iniciais aleatórias para os usuários
 np.random.seed(1)
-latitude = np.random.uniform(-23.6, -23.4, 100)
-longitude = np.random.uniform(-46.7, -46.5, 100)
+latitude = np.random.uniform(-300, 300, 100)
+longitude = np.random.uniform(-300, 300, 100)
 user_locations = np.column_stack((latitude, longitude))
 
 # Parâmetros de movimentação
 step_size = 0.05  # Tamanho do passo (fração da distância para a antena)
-min_distance = 0.01  # Distância mínima para a antena
+min_distance = 10  # Distância mínima para a antena
 
 # Preparação para a animação
 fig, ax = plt.subplots(figsize=(10, 6))
 scat_users = ax.scatter(user_locations[:, 0], user_locations[:, 1], c='blue', label="Usuários")
 scat_antennas = ax.scatter(antenas[:, 0], antenas[:, 1], c='red', marker='x', s=100, label="Antenas (fixas)")
-ax.set_xlim(-23.6, -23.4)
-ax.set_ylim(-46.7, -46.5)
+ax.set_xlim(-300, 300)
+ax.set_ylim(-300, 300)
 ax.set_xlabel("Latitude")
 ax.set_ylabel("Longitude")
 ax.set_title("Movimento dos Usuários em Direção às Antenas")
