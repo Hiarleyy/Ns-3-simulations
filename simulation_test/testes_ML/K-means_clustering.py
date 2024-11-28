@@ -12,18 +12,9 @@ antena3 = np.array([0, 0], dtype=np.float64)  # Nova antena
 antena4 = np.array([-200, 200], dtype=np.float64)  # Outra nova antena
 
 # Dicionário de usuários (posição_x, posição_y)
-usuarios = {
-    'UE0': (23, -74),
-    'UE1': (33, 15),
-    'UE2': (-71, 61),
-    'UE3': (-30, -21),
-    'UE4': (-20, -14),
-    'UE5': (11, -72),
-    'UE6': (-58, 10),
-    'UE7': (67, 15),
-    'UE8': (22, -62),
-    'UE9': (33, -24),
-}
+usuarios = {}
+for i in range(50):
+    usuarios[f'UE{i}'] = (np.random.uniform(x_min, x_max), np.random.uniform(y_min, y_max))
 
 # Configuração inicial
 tempo_simulacao = 60  # segundos
