@@ -5,11 +5,9 @@ import numpy as np
 import seaborn as sns
 
 #%%
-df = pd.read_csv('DlCtrlSinr.csv', sep=',')
+df = pd.read_csv('datasets\DlCtrlSinr.txt', sep='\t')
 
 df
-#%%
-df['']
 # %%
 # Função para filtrar DataFrame por Cellid
 def filter_by_CellId(df, CellId_values):

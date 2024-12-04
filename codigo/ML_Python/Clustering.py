@@ -6,12 +6,13 @@ from scipy.spatial import distance_matrix
 
 # Coordenadas fixas das antenas
 antenas = np.array([
-    [50, -50],
+    [0,50],
+    [0,-50]
 ])
 
 # Gerar posições iniciais aleatórias para os usuários
-np.random.seed(11)
-num_users = 4
+
+num_users = 10
 user_locations = np.random.rand(num_users, 2) * np.array([200, 200]) + np.array([-100, -100])
 
 # Armazenar as posições iniciais
@@ -23,8 +24,8 @@ min_distance = 15  # Distância mínima para a antena
 time_per_frame = 0.2  # Intervalo entre frames (segundos)
 
 # Parâmetros para repulsão entre usuários
-min_user_distance = 7  # Distância mínima entre usuários
-forca_repulsao = 0.05  # Força da repulsão
+min_user_distance = 10  # Distância mínima entre usuários
+forca_repulsao = 10  # Força da repulsão
 
 # Variáveis para rastrear o tempo
 frames_to_finish = 0
@@ -83,32 +84,46 @@ ani = FuncAnimation(fig, update, frames=range(500), interval=200, blit=True)
 ani.save("movimento_usuarios.gif", writer="imagemagick")
 plt.show()
 
-# Calcular o tempo total
 total_time = frames_to_finish * time_per_frame
 
-# Criar o DataFrame com as informações iniciais, finais e de deslocamento
 deslocamento = user_locations - initial_user_locations
 norma_deslocamento = np.linalg.norm(deslocamento, axis=1)
 deslocamento_normalizado = deslocamento / norma_deslocamento[:, np.newaxis]
-
-df = pd.DataFrame({
+# DataFrame para posições iniciais e finais
+df_positions = pd.DataFrame({
     'Usuario': np.arange(len(initial_user_locations)),
     'Posicao_Inicial_X': initial_user_locations[:, 0].round(5),
     'Posicao_Inicial_Y': initial_user_locations[:, 1].round(5),
     'Posicao_Final_X': user_locations[:, 0].round(5),
     'Posicao_Final_Y': user_locations[:, 1].round(5),
+})
+
+# DataFrame para deslocamento e deslocamento normalizado
+df_deslocamento = pd.DataFrame({
+    'Usuario': np.arange(len(initial_user_locations)),
     'Deslocamento_X': deslocamento[:, 0].round(5),
     'Deslocamento_Y': deslocamento[:, 1].round(5),
     'Deslocamento_Normalizado_X': deslocamento_normalizado[:, 0].round(5),
     'Deslocamento_Normalizado_Y': deslocamento_normalizado[:, 1].round(5),
 })
 
+# Salvar em arquivos CSV separados
+df_positions.to_csv('Posicoes.csv', index=False)
+df_deslocamento.to_csv('Deslocamento.csv', index=False)
+
+# Imprimir as informações no console
+print("Posições Iniciais e Finais:")
+print(df_positions)
+
+print("\nDeslocamento e Deslocamento Normalizado:")
+print(df_deslocamento)
+
 # Salvar em um arquivo CSV
-df.to_csv('Posicoes.csv', index=False)
+df_positions.to_csv('Posicoes.csv', index=False)
 
 # Imprimir as informações no console
 print("Posições Iniciais, Finais, Deslocamento e Deslocamento Normalizado:")
-print(df)
+print(df_positions)
 
 # Exibir o tempo total
 print(f"\nTempo total para os usuários alcançarem suas posições finais: {total_time:.2f} segundos")
