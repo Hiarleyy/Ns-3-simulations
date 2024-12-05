@@ -6,7 +6,7 @@ import numpy as np
 #%%
 # Gerando dados simulados para a localização de usuários
 np.random.seed(11)
-n_users = 100
+n_users = 50
 x_users = np.random.uniform(0, 100, n_users)  # Coordenada X dos usuários
 y_users = np.random.uniform(0, 100, n_users)  # Coordenada Y dos usuários
 user_locations = np.array(list(zip(x_users, y_users)))
@@ -28,6 +28,13 @@ kmeans.fit(user_locations)
 antenna_positions_after = kmeans.cluster_centers_
 labels = kmeans.labels_
 
+print('Posicionamento das antenas antes da otimização:')
+for i, pos in enumerate(antenna_positions_before):
+    print(f'Antena {i+1}: {pos}')
+print('=====================================')
+print('Posicionamento otimizado das antenas:')
+for i, pos in enumerate(antenna_positions_after):
+    print(f'Antena {i+1}: {pos}')
 #%%
 plt.figure(figsize=(10, 8))
 plt.scatter(x_users, y_users, c=labels, cmap='viridis', s=50, label="Usuários")
