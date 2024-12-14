@@ -5,7 +5,7 @@ import numpy as np
 import seaborn as sns
 
 #%%
-df = pd.read_csv('datasets\DlCtrlSinr.txt', sep='\t')
+df = pd.read_csv('tratamento/files/csv/DlCtrlSinr.csv')
 
 df
 # %%
@@ -13,7 +13,7 @@ df
 def filter_by_CellId(df, CellId_values):
     return {CellId: df[df['CellId'] == CellId] for CellId in CellId_values}
 
-CellId_values = [2, 4]  # Apenas os valores de CellId 2 e 4
+CellId_values = [2,4,6,8]  # Apenas os valores de CellId 2 e 4
 filtered_dfs = filter_by_CellId(df, CellId_values)
 
 
