@@ -1,3 +1,4 @@
+
 #%%
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -68,15 +69,23 @@ for i, CellId in enumerate(CellId_values):
     user_df = filtered_dfs[CellId]
     x = user_df['Time']
     y = user_df['SINR(dB)']
-    z = np.zeros_like(x) + i  # Create a z-axis value for each CellId
+    z_stat = user_df['SINR(dB)'].mean()  # Calculate the mean SINR for each CellId
+    z = np.zeros_like(x) + z_stat  # Use the mean SINR as the z-axis value
     
-    ax.scatter(x, y, z, label=f'CellId {CellId}', color=colors[i % len(colors)], marker=markers[i % len(markers)], alpha=0.6)
+    ax.scatter(x, y, z, label=f'CellId {CellId}', color=colors[i % len(colors)], marker=markers[i % len(markers)], alpha=0.1)  # Set alpha to 0.1 for more translucency
 
-ax.set_title('3D Density Plot of SINR over Time for CellIds', fontsize=16)
-ax.set_xlabel('Time (sec)', fontsize=14)
-ax.set_ylabel('SINR (dB)', fontsize=14)
-ax.set_zlabel('CellId', fontsize=14)
-ax.legend(title='CellIds', fontsize=12, title_fontsize='13')
+# Add legend separately to avoid transparency
+handles, labels = ax.get_legend_handles_labels()
+for handle in handles:
+    handle.set_alpha(1.0)  # Set alpha to 1.0 for legend items
+
+ax.set_title('Gráfico de densidade (SINR) com média', fontsize=16)
+ax.set_xlabel('Time (sec)', fontsize=11)
+ax.set_ylabel('SINR (dB)', fontsize=11)
+ax.set_zlabel('SINR MEAN', fontsize=11)
+ax.legend(handles, labels, title='CellIds', fontsize=11, title_fontsize='11')
+ax.view_init(elev=20., azim=-35)  # Adjust the elevation and angle for better visualization
+plt.subplots_adjust(left=0.2, right=0.9, top=0.9, bottom=0.1)  # Adjust the plot to make space for the z-axis label
 plt.show()
 
 
