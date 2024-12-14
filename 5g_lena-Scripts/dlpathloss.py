@@ -1,3 +1,4 @@
+
 #%%
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -33,8 +34,9 @@ for i, imsi in enumerate(imsi_values):
 plt.title('Path Loss DlPathlossTrace')
 plt.xlabel('Time (sec)')
 plt.ylabel('Path Loss (dB)')
-plt.legend(title='Users')
+plt.legend(title='Users', bbox_to_anchor=(1.05, 1), loc='upper left')  # Move legend outside the plot
 plt.grid(True)
+plt.tight_layout()  # Adjust layout to make room for the legend
 plt.show()
 
 #%%

@@ -42,9 +42,9 @@ plt.show()
 # Clean plot
 plt.figure(figsize=(12, 8))
 
-colors = ['b', 'g']  # Define colors for each user
-markers = ['o', 's']  # Define markers for each user
-linestyles = ['-', '--']  # Define line styles for each user
+colors = ['b', 'g', 'r', 'c']  # Define colors for each user
+markers = ['o', 's', 'd', '^']  # Define markers for each user
+linestyles = ['-', '--', '-.', ':']  # Define line styles for each user
 
 for i, CellId in enumerate(CellId_values):
     user_df = filtered_dfs[CellId]
@@ -82,10 +82,10 @@ for handle in handles:
 ax.set_title('Gráfico de densidade (SINR) com média', fontsize=16)
 ax.set_xlabel('Time (sec)', fontsize=11)
 ax.set_ylabel('SINR (dB)', fontsize=11)
-ax.set_zlabel('SINR MEAN', fontsize=11)
 ax.legend(handles, labels, title='CellIds', fontsize=11, title_fontsize='11')
 ax.view_init(elev=20., azim=-35)  # Adjust the elevation and angle for better visualization
-plt.subplots_adjust(left=0.2, right=0.9, top=0.9, bottom=0.1)  # Adjust the plot to make space for the z-axis label
+plt.subplots_adjust(left=0.2, right=0.9, top=0.9, bottom=0.2)  # Adjust the plot to make space for the z-axis label
+ax.set_zlabel('SINR MEAN', fontsize=11)
 plt.show()
 
 
