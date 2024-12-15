@@ -253,10 +253,9 @@ plt.xlabel('IMSI')
 plt.ylabel('Change in Path Loss (%)')
 plt.legend(title='CellId')
 
-
 # Add text labels for each bar
 for i, row in first_last_pathloss_all.iterrows():
-    plt.text(i, row['Change (%)'] + 0.5, f"{row['Change (%)']:.2f}%", ha='center', va='bottom')
+    plt.text(i, row['Change (%)'] + 0.5, f"{row['Change (%)']:.2f}%", ha='center', va='bottom', fontsize=8)
 
 plt.show()
 # %%
