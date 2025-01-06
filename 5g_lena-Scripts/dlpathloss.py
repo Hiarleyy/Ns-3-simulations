@@ -1,9 +1,10 @@
+
 #%%
 import pandas as pd 
 import matplotlib.pyplot as plt
 
 #%%
-df = pd.read_csv('datasets/DlPathlossTrace.txt', sep='\t')
+df = pd.read_csv('tratamento/files/csv/DlPathlossTrace.csv' )
 print(df.columns)  # Print the columns to verify the names
 df # Count the number of occurrences of each value in the 'IMSI' column
 
@@ -33,8 +34,9 @@ for i, imsi in enumerate(imsi_values):
 plt.title('Path Loss DlPathlossTrace')
 plt.xlabel('Time (sec)')
 plt.ylabel('Path Loss (dB)')
-plt.legend(title='Users')
+plt.legend(title='Users', bbox_to_anchor=(1.05, 1), loc='upper left')  # Move legend outside the plot
 plt.grid(True)
+plt.tight_layout()  # Adjust layout to make room for the legend
 plt.show()
 
 #%%
