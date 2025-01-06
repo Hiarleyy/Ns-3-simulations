@@ -6,7 +6,7 @@ import numpy as np
 #%%
 # Gerando dados simulados para a localização de usuários
 n_users = 20
-np.random.seed(42) ## NAO TIRAR A SEED PELO AMOR DE DEUS
+np.random.seed(11) ## NAO TIRAR A SEED PELO AMOR DE DEUS
 #👆👆👆👆👆👆👆
 x_users = np.random.uniform(0, 80, n_users)  # Coordenada X dos usuários
 y_users = np.random.uniform(0, 80, n_users)  # Coordenada Y dos usuários
