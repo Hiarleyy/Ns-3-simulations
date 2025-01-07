@@ -6,7 +6,7 @@ import seaborn as sns
 
 #%%
 # Carrega o arquivo CSV em um DataFrame
-df = pd.read_csv('tratamento/files/csv/DlCtrlSinr.csv')
+df = pd.read_csv('datasets\csv\DlCtrlSinr.csv')
 
 df
 # %%
