@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 #%%
 # Gerando dados simulados para a localização de usuários
-n_users = 20
-np.random.seed(11) ## NAO TIRAR A SEED PELO AMOR DE DEUS
+n_users = 10
+np.random.seed(10) ## NAO TIRAR A SEED PELO AMOR DE DEUS
 #👆👆👆👆👆👆👆
-x_users = np.random.uniform(0, 80, n_users)  # Coordenada X dos usuários
-y_users = np.random.uniform(0, 80, n_users)  # Coordenada Y dos usuários
+x_users = np.random.uniform(0, 50, n_users)  # Coordenada X dos usuários
+y_users = np.random.uniform(0, 50, n_users)  # Coordenada Y dos usuários
 user_locations = np.array(list(zip(x_users, y_users)))
 user_ids = [f'Ue{i}' for i in range(n_users)]
 user_positions_df = pd.DataFrame(user_locations, columns=['Posição X', 'Posição Y'])
@@ -18,11 +18,11 @@ user_positions_df = user_positions_df[['ID', 'Posição X', 'Posição Y']]
 user_positions_df.to_csv('user_positions.csv', index=False)
 
 #definindo as posições iniciais das antenas
-antenna_positions_before = np.array([[10, 10], [10, 90], [90, 10], [90, 90]])
+antenna_positions_before = np.array([[0, 0], [0,50]])
 # Número de ante    nas (clusters desejados)
-n_antennas = 4
+n_antennas = 2
 # Aplicando k-means para encontrar os clusters
-kmeans = KMeans(n_clusters=n_antennas, random_state=42)
+kmeans = KMeans(n_clusters=n_antennas)
 kmeans.fit(user_locations)
 
 # Coordenadas dos centros das antenas (clusters)
