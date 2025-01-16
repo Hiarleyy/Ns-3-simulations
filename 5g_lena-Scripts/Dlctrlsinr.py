@@ -14,7 +14,7 @@ df
 def filter_by_CellId(df, CellId_values):
     return {CellId: df[df['CellId'] == CellId] for CellId in CellId_values}
 
-CellId_values = [2, 4, 6, 8]  # Apenas os valores de CellId 2, 4, 6 e 8
+CellId_values = [2]  # Apenas os valores de CellId 2, 4, 6 e 8
 filtered_dfs = filter_by_CellId(df, CellId_values)
 
 # Configurações do gráfico
@@ -232,7 +232,7 @@ for CellId in CellId_values:
 time_df = pd.DataFrame(time_values)
 time_df
 
-# %%
+#%%
 # Plota a variação do SINR ao longo do tempo para cada RNTI, separado por CellId
 for CellId in CellId_values:
     plt.figure(figsize=(12, 8))
