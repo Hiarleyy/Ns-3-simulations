@@ -15,9 +15,9 @@ y_users = user_positions_df['POSICAO_Y'].values
 user_locations = np.array(list(zip(x_users, y_users)))
 
 #definindo as posições iniciais das antenas
-antenna_positions_before = np.array([[0,0]])
+antenna_positions_before = np.array([[0,4],[0,2]])
 # Número de ante    nas (clusters desejados)
-n_antennas = 1
+n_antennas = 2
 # Aplicando k-means para encontrar os clusters
 kmeans = KMeans(n_clusters=n_antennas)
 kmeans.fit(user_locations)

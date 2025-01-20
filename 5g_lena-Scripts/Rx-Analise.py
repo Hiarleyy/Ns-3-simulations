@@ -46,3 +46,14 @@ plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1)
 plt.tight_layout()
 plt.show()
 # %%
+df[df['cellId'] == 1]['CQI'].describe()# %%
+
+#%%
+plt.plot(df['Time'], df['CQI']) 
+plt.title('CQI over time')
+plt.xlabel('time(s)')
+plt.ylabel('CQI')
+plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1)
+plt.tight_layout()
+plt.show()
+# %%
