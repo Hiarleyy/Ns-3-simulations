@@ -46,14 +46,28 @@ plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1)
 plt.tight_layout()
 plt.show()
 # %%
-df[df['cellId'] == 1]['CQI'].describe()# %%
+df1_cqi = df.loc[df['cellId'] == 1, 'CQI']
+df2_cqi = df.loc[df['cellId'] == 3, 'CQI']
 
-#%%
-plt.plot(df['Time'], df['CQI']) 
-plt.title('CQI over time')
-plt.xlabel('time(s)')
+min_cqi_1, max_cqi_1 = df1_cqi.min(), df1_cqi.max()
+min_cqi_3, max_cqi_3 = df2_cqi.min(), df2_cqi.max()
+
+labels = ['CellID 1', 'CellID 3']
+min_values = [min_cqi_1, min_cqi_3]
+max_values = [max_cqi_1, max_cqi_3]
+
+x = np.arange(len(labels))
+width = 0.35
+
+plt.figure(figsize=(7, 5))
+plt.bar(x - width/2, min_values, width, label='Min CQI',color='red')
+plt.bar(x + width/2, max_values, width, label='Max CQI',color='blue')  
+
+plt.xticks(x, labels)
+plt.title('Min & Max CQI for each Cell ID')
+plt.xlabel('Cell ID')
 plt.ylabel('CQI')
-plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1)
+plt.legend()
 plt.tight_layout()
 plt.show()
 # %%
