@@ -153,9 +153,6 @@ cellid_imsi_grouped = df.groupby(['CellId', 'IMSI']).size().reset_index(name='Co
 
 print(cellid_imsi_grouped)
 # %%
-#### testes isolados para CellId 3 e 7
-
-# Filter the DataFrame for CellId 3
 filtered_df_3 = df[df['CellId'] == 3]
 
 # Identify unique IMSI values for the filtered DataFrame
@@ -172,29 +169,6 @@ for i, imsi in enumerate(filtered_imsi_values_3):
     plt.plot(user_df['Time(sec)'], user_df['pathLoss(dB)'], label=f'imsi {imsi}', color=colors(i), marker=markers[i % len(markers)], linestyle='-', markersize=1)
 
 plt.title('Path Loss UlPathlossTrace for CellId 3')
-plt.xlabel('Time (sec)')
-plt.ylabel('Path Loss (dB)')
-plt.legend(title='Users')
-plt.grid(True)
-plt.show()
-
-# Filter the DataFrame for CellId 7
-filtered_df_7 = df[df['CellId'] == 7]
-
-# Identify unique IMSI values for the filtered DataFrame
-filtered_imsi_values_7 = filtered_df_7['IMSI'].unique()
-filtered_dfs_7 = filter_by_rnti(filtered_df_7, filtered_imsi_values_7)
-
-plt.figure(figsize=(12, 8))
-
-colors = plt.cm.get_cmap('tab10', len(filtered_imsi_values_7))  # Get a colormap with enough colors
-markers = ['o', 's', 'D', '^', 'v', '<', '>', 'p', '*', 'h']  # Define markers for each user
-
-for i, imsi in enumerate(filtered_imsi_values_7):
-    user_df = filtered_dfs_7[imsi]
-    plt.plot(user_df['Time(sec)'], user_df['pathLoss(dB)'], label=f'imsi {imsi}', color=colors(i), marker=markers[i % len(markers)], linestyle='-', markersize=1)
-
-plt.title('Path Loss UlPathlossTrace for CellId 7')
 plt.xlabel('Time (sec)')
 plt.ylabel('Path Loss (dB)')
 plt.legend(title='Users')

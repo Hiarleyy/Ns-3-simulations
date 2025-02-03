@@ -46,28 +46,46 @@ plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1)
 plt.tight_layout()
 plt.show()
 # %%
-df1_cqi = df.loc[df['cellId'] == 1, 'CQI']
-df2_cqi = df.loc[df['cellId'] == 3, 'CQI']
-
-min_cqi_1, max_cqi_1 = df1_cqi.min(), df1_cqi.max()
-min_cqi_3, max_cqi_3 = df2_cqi.min(), df2_cqi.max()
-
-labels = ['CellID 1', 'CellID 3']
-min_values = [min_cqi_1, min_cqi_3]
-max_values = [max_cqi_1, max_cqi_3]
-
-x = np.arange(len(labels))
-width = 0.35
-
-plt.figure(figsize=(7, 5))
-plt.bar(x - width/2, min_values, width, label='Min CQI',color='red')
-plt.bar(x + width/2, max_values, width, label='Max CQI',color='blue')  
-
-plt.xticks(x, labels)
-plt.title('Min & Max CQI for each Cell ID')
-plt.xlabel('Cell ID')
+CQI_medio1 = df[df['cellId'] == 1].groupby('rnti')['CQI'].mean().reset_index()
+CQI_medio1
+#%%
+CQI_medio2 = df[df['cellId'] == 3].groupby('rnti')['CQI'].mean().reset_index()
+CQI_medio2
+#%%
+plt.plot(df['Time'], df['CQI']) 
+plt.title('CQI over time')
+plt.xlabel('time(s)')
 plt.ylabel('CQI')
-plt.legend()
+plt.legend(loc='upper left', bbox_to_anchor=(1, 1), ncol=1)
 plt.tight_layout()
+plt.show()
+#%%
+df = pd.DataFrame(CQI_medio1)
+
+otimo = df[(df['CQI'] > 20)].shape[0]
+bom = df[(df['CQI'] > 15)& (df['CQI'] < 25)].shape[0]
+
+labels = ['BOM(>15)','ÓTIMO(>20)']
+sizes = [bom,otimo]
+explode = (0.05, 0)  
+
+plt.figure(figsize=(8, 6))
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+plt.title('CQI MEDIO POR RNTI - ENB1')
+plt.show()
+#%%
+df = pd.DataFrame(CQI_medio2)
+
+otimo = df[(df['CQI'] > 20)].shape[0]
+bom = df[(df['CQI'] > 15)& (df['CQI'] < 25)].shape[0]
+medio = df[(df['CQI'] < 15) & (df['CQI'] > 10)].shape[0]
+
+labels = ['BOM(>15)', 'MÉDIO(15-10)','ÓTIMO(>20)']
+sizes = [bom,medio,otimo]
+explode = (0.05, 0)  
+
+plt.figure(figsize=(8, 6))
+plt.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+plt.title('CQI MÉDIO POR RNTI - ENB2')
 plt.show()
 # %%

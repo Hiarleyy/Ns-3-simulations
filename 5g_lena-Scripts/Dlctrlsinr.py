@@ -6,30 +6,32 @@ import seaborn as sns
 
 #%%
 # Carrega o arquivo CSV em um DataFrame
-df = pd.read_csv('datasets\csv\DlCtrlSinr.csv')
+df = pd.read_csv('datasets/csv/DlCtrlSinr.csv')
 
 df
+#%%
+df['CellId'].unique()
 # %%
 # Função para filtrar DataFrame por CellId
 def filter_by_CellId(df, CellId_values):
     return {CellId: df[df['CellId'] == CellId] for CellId in CellId_values}
 
-CellId_values = [2]  # Apenas os valores de CellId 2, 4, 6 e 8
+CellId_values = [2, 4]  # Valores de CellId 2 e 4
 filtered_dfs = filter_by_CellId(df, CellId_values)
 
 # Configurações do gráfico
 plt.figure(figsize=(12, 8))
 
-colors = ['b', 'g', 'r', 'c']  # Define cores para cada usuário
-markers = ['o', 's', 'o', 's']  # Define marcadores para cada usuário
-linestyles = ['-', '--', '--', '--']  # Define estilos de linha para cada usuário
+colors = ['b', 'g']  # Define cores para cada usuário
+markers = ['o', 's']  # Define marcadores para cada usuário
+linestyles = ['-', '--']  # Define estilos de linha para cada usuário
 
 # Plota o gráfico de SINR ao longo do tempo para cada CellId
 for i, CellId in enumerate(CellId_values):
     user_df = filtered_dfs[CellId]
     plt.plot(user_df['Time'], user_df['SINR(dB)'], label=f'CellId {CellId}', color=colors[i], marker=markers[i], linestyle=linestyles[i], markersize=1, linewidth=1.5, alpha=0.5)  # Define alpha para 0.5 para translucidez
 
-plt.title('SINR ao longo do tempo para CellIds 2, 4, 6 e 8', fontsize=16)
+plt.title('SINR ao longo do tempo para CellIds 2 e 4', fontsize=16)
 plt.xlabel('Tempo (seg)', fontsize=14)
 plt.ylabel('SINR (dB)', fontsize=14)
 plt.legend(title='CellIds', fontsize=12, title_fontsize='13')
@@ -142,6 +144,21 @@ axs[-1].set_xlabel('CellId', fontsize=12)
 
 plt.tight_layout()
 plt.show()
+
+#%%
+
+fig, ax = plt.subplots(figsize=(10, 5))
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
+ax.axis('off')
+
+message = "CUIDADO COM O RNTI!!"
+ax.text(0.5, 0.5, message, fontsize=24, color='red', ha='center', va='center', fontweight='bold')
+
+plt.show()
+
+
+
 
 # %%
 # Agrupa o DataFrame por CellId e descreve as estatísticas do SINR
