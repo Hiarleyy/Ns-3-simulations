@@ -1,4 +1,3 @@
-
 # 10 Nodes Simulation Results
 
 **Language / Idioma:** [🇺🇸 English](10node_results_ENG.md) | [🇧🇷 Português](10node_results.md)
@@ -31,14 +30,14 @@ User 9: Position: [248.56036069 200.02072991], Application Priority: <font color
 User 10: Position: [318.96136855 306.54287198], Application Priority: <font color="#ff0000">high</font>
 
 
-# Métricas de Sinal-Ruido
+# Signal-to-Noise Ratio Metrics
 
 ## Original Data Per User
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/86d1c816-9241-40db-ad69-9c1c7915611b)
 
 
-## Optmized Data Per User
+## Optimized Data Per User
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/c0bb4107-b84f-45d5-a660-ab8cfc5314ea)
 
@@ -47,7 +46,7 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/523dab66-1e41-43db-b6ca-e6f9426990f5)
 
 
-# Métricas de Delay
+# Delay Metrics
 
 ## Original data per user 
 
@@ -61,7 +60,7 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/a6fadba8-a9c8-42a3-928e-810b1db3d3a3)
 
 
-# Optmized data per user
+# Optimized data per user
 
 - ### Line
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/2272e075-ef5c-47da-b399-a95c16a4538f)
@@ -81,7 +80,6 @@ User 10: Position: [318.96136855 306.54287198], Application Priority: <font colo
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/cb1619fb-a987-42c6-a541-5edc85a82ec4)
 
-## Optmized Position
+## Optimized Position
 
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/cf3786a0-b548-471f-a23b-95b3a4db4025)
-

@@ -1,44 +1,44 @@
-# Algoritmo Batman  🦇 🦇 🦇
+# Batman Algorithm  🦇 🦇 🦇
 
 **Language / Idioma:** [🇺🇸 English](bat_ENG.md) | [🇧🇷 Português](bat.md)
 
-O [código](https://github.com/Hiarleyy/Ns-3-simulations/blob/main/batman.py)  implementa uma versão simplificada do algoritmo BAT (Bat Algorithm) para otimização de posicionamento de usuários em uma rede de internet, considerando a presença de uma antena e a movimentação dos usuários. Vamos analisar o que cada parte do código faz:
+The [code](https://github.com/Hiarleyy/Ns-3-simulations/blob/main/batman.py) implements a simplified version of the BAT (Bat Algorithm) for optimizing user positioning in an internet network, considering the presence of an antenna and user movement. Let's analyze what each part of the code does:
 
-### Importações e Definição de Constantes
+### Imports and Constant Definition
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
 ```
 
-#### Definindo constantes
+#### Defining constants
 ```python
 NUM_USERS = 2
 DIMENSIONS = 2  # x, y
 BAT_POPULATION = 30
 MAX_ITER = 1000
 ```
-Aqui são importadas as bibliotecas necessárias e definidas as constantes para o número de usuários, dimensões do espaço (2D), tamanho da população de morcegos e número máximo de iterações.
+Here, the necessary libraries are imported and constants are defined for the number of users, space dimensions (2D), bat population size, and maximum number of iterations.
 
-### Funções Auxiliares
+### Auxiliary Functions
 
-#### Função de Intensidade de Sinal
+#### Signal Intensity Function
 ```python
 def signal_intensity(antenna_pos, user_pos):
     distance = np.linalg.norm(antenna_pos - user_pos, axis=1)
     return 1 / (distance ** 2)
 ```
-Esta função calcula a intensidade do sinal baseado na distância entre a antena e as posições dos usuários.
+This function calculates signal intensity based on the distance between the antenna and user positions.
 
-#### Função de Prioridade da Aplicação
+#### Application Priority Function
 ```python
 def application_priority(app_type):
     priorities = {'video': 1.0, 'voice': 0.8, 'data': 0.5}
     return priorities.get(app_type, 0.5)
 ```
 
-Esta função atribui uma prioridade para cada tipo de aplicação (video, voz, dados).
+This function assigns a priority for each application type (video, voice, data).
 
-#### Função de Fitness
+#### Fitness Function
 ```python
 def fitness(antenna_pos, user_positions, user_apps):
     intensities = signal_intensity(antenna_pos, user_positions)
@@ -46,9 +46,9 @@ def fitness(antenna_pos, user_positions, user_apps):
     return np.sum(intensities * priorities)
 ```
 
-A função de fitness avalia a qualidade das posições dos usuários baseado na intensidade do sinal e na prioridade das aplicações.
+The fitness function evaluates the quality of user positions based on signal intensity and application priority.
 
-### Inicialização dos Morcegos
+### Bat Initialization
 ```python
 def initialize_bats(num_bats, num_users, dimensions, min_dist=300, max_dist=500):
     user_positions = []
@@ -57,9 +57,9 @@ def initialize_bats(num_bats, num_users, dimensions, min_dist=300, max_dist=500)
     return np.array(user_positions)
 ```
 
-Esta função inicializa as posições dos usuários de forma aleatória dentro de um intervalo definido.
+This function randomly initializes user positions within a defined range.
 
-### Atualização de Posições
+### Position Update
 
 ```python
 def update_position(bats, best_bat, f_min, f_max, antenna_pos, app_priorities, separation_factor=0.8, lower_bound=0, upper_bound=500):
@@ -98,9 +98,9 @@ def update_position(bats, best_bat, f_min, f_max, antenna_pos, app_priorities, s
 
     return new_positions
 ```
-Esta função atualiza as posições dos morcegos (usuários), garantindo que as novas posições respeitem certas condições, como distância mínima da antena e entre usuários.
+This function updates bat (user) positions, ensuring that new positions respect certain conditions such as minimum distance from the antenna and between users.
 
-### Algoritmo BAT Principal
+### Main BAT Algorithm
 ```python
 def bat_algorithm(antenna_pos, user_positions, user_apps, num_bats=BAT_POPULATION, max_iter=MAX_ITER):
     bats = initialize_bats(num_bats, NUM_USERS, DIMENSIONS, min_dist=50, max_dist=450)
@@ -121,9 +121,9 @@ def bat_algorithm(antenna_pos, user_positions, user_apps, num_bats=BAT_POPULATIO
 
     return best_bat, fitness_history
 ```
-Esta função implementa o algoritmo BAT para otimização das posições dos usuários, buscando a melhor posição que maximiza a função de fitness.
+This function implements the BAT algorithm for optimizing user positions, searching for the best position that maximizes the fitness function.
 
-### Plotagem e Exemplo de Uso
+### Plotting and Usage Example
 ```python
 def plot_results(antenna_pos, original_user_pos, new_user_pos):
     plt.figure(figsize=(10, 10))
@@ -147,7 +147,7 @@ def plot_results(antenna_pos, original_user_pos, new_user_pos):
     plt.grid(True)
     plt.show()
 ```
-# Exemplo de uso
+# Usage Example
 ```python
 antenna_pos = np.array([250, 250])
 user_positions = initialize_bats(1, NUM_USERS, DIMENSIONS, min_dist=50, max_dist=450)[0]
@@ -163,18 +163,17 @@ for i, (pos, app) in enumerate(zip(user_positions, user_apps)):
 print("Optimized User Positions:")
 for i, (pos, app) in enumerate(zip(new_user_positions, user_apps)):
     print(f"User {i+1}: Position: {pos}, Application Priority: {app}")
-print("Deslocamento dos usuários otimizados:")
+print("Optimized user displacement:")
 for i in range(NUM_USERS):
     displacement = np.linalg.norm(new_user_positions[i] - user_positions[i])
-    print(f"Usuário {i+1}: Deslocamento: {displacement:.2f}")
-print("Distância dos usuários em relação à antena:")
+    print(f"User {i+1}: Displacement: {displacement:.2f}")
+print("User distance relative to antenna:")
 for i in range(NUM_USERS):
     distance_before = np.linalg.norm(user_positions[i] - antenna_pos)
     distance_after = np.linalg.norm(new_user_positions[i] - antenna_pos)
-    print(f"Usuário {i+1}: Antes: {distance_before:.2f}, Depois: {distance_after:.2f}")
+    print(f"User {i+1}: Before: {distance_before:.2f}, After: {distance_after:.2f}")
 ```
-A função plot_results plota as posições dos usuários antes e depois da otimização. O exemplo de uso inicializa as posições dos usuários, executa o algoritmo BAT para otimização e plota os resultados, além de imprimir as posições e deslocamentos dos usuários.
+The plot_results function plots user positions before and after optimization. The usage example initializes user positions, executes the BAT algorithm for optimization, and plots the results, while also printing user positions and displacements.
 
-### Resumo
-O código simula um cenário onde usuários de uma rede se movem em relação a uma antena, otimizando suas posições para melhorar a intensidade do sinal e priorizar certos tipos de aplicações. Utiliza o algoritmo BAT para essa otimização, assegurando que as novas posições sejam adequadas e respeitem distâncias mínimas necessárias.
-
+### Summary
+The code simulates a scenario where network users move relative to an antenna, optimizing their positions to improve signal intensity and prioritize certain types of applications. It uses the BAT algorithm for this optimization, ensuring that new positions are adequate and respect necessary minimum distances.

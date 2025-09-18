@@ -1,14 +1,12 @@
-Ns-3-simulations
-Tasks
+# Ns-3-simulations
 
-Click here to see the tasks
+**Language / Idioma:** [🇺🇸 English](Readme_ENG.md) | [🇧🇷 Português](../README.md)
 
-Network simulator
+## Network simulator
 
-Ns-3
- is a discrete-event network simulator for Internet systems, primarily aimed at research and educational use. Ns-3 is free and open-source software, licensed under the GNU GPLv2 license, and maintained by a worldwide community.
+[Ns-3](https://www.nsnam.org/) is a discrete-event network simulator for Internet systems, primarily aimed at research and educational use. Ns-3 is free and open-source software, licensed under the GNU GPLv2 license, and maintained by a worldwide community.
 
-mmWave: Ns-3 module
+## mmWave: Ns-3 module
 
 This is an ns-3 module for simulating 5G cellular networks operating in mmWaves.
 
@@ -26,9 +24,9 @@ Dual connectivity with LTE base stations, featuring fast secondary cell handover
 
 Core network elements simulation (also with MME as a real node).
 
-For more information about this module, visit mmWave-Ns3
+For more information about this module, visit [mmWave-Ns3](https://github.com/nyuwireless-unipd/ns3-mmwave)
 
-RxPacketTrace
+## RxPacketTrace
 RxPacketTrace is responsible for monitoring the packets transmitted during the simulation. Each column of the file contains specific information about the packets transmitted (DL-Downlink) and packets received (UL-Uplink).
 
 DL/UL - Indicates the packet state: Downlink (packet sent by the base station) or Uplink (packet sent by the user to the base station).
@@ -63,7 +61,7 @@ corrupt: Binary indicator (0 or 1) showing whether the packet was corrupted (1) 
 
 TBler: Transport Block Error Rate, the proportion of transport blocks received with errors.
 
-DlRLcStats
+## DlRLcStats
 The DlRlcStats file is used to analyze the performance of the RLC (Radio Link Control) layer in the downlink (DL) of a network simulation carried out with ns-3. It contains detailed metrics to evaluate and understand data transmission behavior in the network.
 
 % start: Start of the time interval (in seconds) for the recorded statistics.
@@ -102,13 +100,12 @@ min.1: Minimum PDU size (in bytes).
 
 max.1: Maximum PDU size (in bytes).
 
-Documentation
-Batman Algorithm
- || NS3 Simulation in C++
- || Results 10Nodes
- || Docker NS3-MmWave
-Contact
-Marcos Hiarley
+## Documentation
+[Batman Algorithm](bat_ENG.md) || [NS3 Simulation in C++](packet5G_ENG.md) || [Results 10Nodes](10node_results_ENG.md) || [Docker NS3-MmWave](Docker-MmWave_ENG.md)
+
+## Contact
+
+### Marcos Hiarley
 <div> <a href ="mailto:marcoshiarley.silva@gmail.com"><img src ="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a> <a href ="https://www.instagram.com/hiarley._/"><img src ="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"></a> <a href ="https://www.linkedin.com/in/marcos-hiarley/"><img src ="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" href="www.linkedin.com/in/marcos-hiarley-1853a7226"/></a> </div>
-Robert Gabriel
+### Robert Gabriel
 <div> <a href ="mailto:robertgabriel@disroot.org"><img src ="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a> <a href ="https://www.instagram.com/robertdsgabriel/"><img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white"></a> </div>
