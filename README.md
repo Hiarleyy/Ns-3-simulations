@@ -1,4 +1,6 @@
 ﻿# Ns-3-simulations
+
+**[English](README_EN.md) | Português**
 ### Tasks
 [Clique aqui para ver as tasks](Tasks)
 
