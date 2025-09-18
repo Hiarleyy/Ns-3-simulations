@@ -2,10 +2,6 @@
 
 **Language / Idioma:** [🇺🇸 English](Readme_ENG.md) | [🇧🇷 Português](../README.md)
 
-## Tasks
-
-[Click here to see the tasks](../Tasks)
-
 ## Network simulator
 
 [Ns-3](https://www.nsnam.org/) is a discrete-event network simulator for Internet systems, primarily aimed at research and educational use. Ns-3 is free and open-source software, licensed under the GNU GPLv2 license, and maintained by a worldwide community.

@@ -2,6 +2,7 @@ tags: #fleeting #5g #ns3 #project
 Created:2024-06-20, Thu Jun 4 - 19:31
 Week-number:25
 
+**Language / Idioma:** [🇺🇸 English](Docker-MmWave_ENG.md) | [🇧🇷 Português](Docker-MmWave.md)
 
 ## Resumo:
 

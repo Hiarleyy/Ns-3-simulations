@@ -1,5 +1,6 @@
 # Algoritmo Batman  🦇 🦇 🦇
 
+**Language / Idioma:** [🇺🇸 English](bat_ENG.md) | [🇧🇷 Português](bat.md)
 
 O [código](https://github.com/Hiarleyy/Ns-3-simulations/blob/main/batman.py)  implementa uma versão simplificada do algoritmo BAT (Bat Algorithm) para otimização de posicionamento de usuários em uma rede de internet, considerando a presença de uma antena e a movimentação dos usuários. Vamos analisar o que cada parte do código faz:
 

@@ -1,5 +1,8 @@
 
 # 10 Nodes Simulation Results
+
+**Language / Idioma:** [🇺🇸 English](10node_results_ENG.md) | [🇧🇷 Português](10node_results.md)
+
 ![image](https://github.com/Hiarleyy/Ns-3-simulations/assets/111695591/05505141-9641-48a3-a8c6-7af2b5f93aff)
 
 Antenna Position: [250 250]
